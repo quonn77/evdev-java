@@ -2,6 +2,7 @@ package com.dgis.input.evdev;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.net.URL;
 
 /*
  * Copyright (C) 2009 Giacomo Ferrari
@@ -163,7 +165,27 @@ public class EventDevice implements IEventDevice{
 	 * @throws IOException If the device is not found, or is otherwise inaccessible.
 	 */
 	public EventDevice(String device) throws IOException {
-		System.loadLibrary("evdev-java");
+		// check for embedded library:
+		String libPath = "/NATIVE/arm/libevdev-java.so";
+		InputStream in = this.getClass().getResourceAsStream(libPath);
+		if (in != null) {
+			final File nativeLibFile = File.createTempFile("libevdev-java", ".so");
+			nativeLibFile.deleteOnExit();
+
+			final OutputStream out = new BufferedOutputStream(new FileOutputStream(nativeLibFile));
+
+			int len = 0;
+			byte[] buffer = new byte[8192];
+			while ((len = in.read(buffer)) > -1) {
+				out.write(buffer, 0, len);
+			}
+			out.close();
+			in.close();
+
+			System.load(nativeLibFile.getAbsolutePath());
+		} else {
+			System.loadLibrary("evdev-java");
+		}
 		this.device = device;
 		inputBuffer.order(ByteOrder.LITTLE_ENDIAN);
 		initDevice();

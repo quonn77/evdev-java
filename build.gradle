@@ -1,1 +1,22 @@
-apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'osgi'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.codehaus.groovy:groovy-all:2.1.6'
+	compile 'org.osgi:org.osgi.core:4.3.1'
+}
+
+version = '0.1-SNAPSHOT'
+group = 'com.xoeye.runtime'
+
+jar {
+	manifest {
+		name = 'Evdev Native Library'
+		instruction 'Bundle-Vendor', 'XOEye Technologies'
+		instruction 'Bundle-Description', 'Evdev native JNI library'
+	}
+}
