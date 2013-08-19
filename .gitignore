@@ -1,4 +1,6 @@
 bin
 *.so
 *.dll
+.gradle
+build
 
