@@ -266,14 +266,16 @@ public class EventDevice implements IEventDevice{
 		try {
 			/* Read exactly the amount of bytes specified by InputEvent.STRUCT_SIZE_BYTES (intrinsic size of inputBuffer)*/
 			inputBuffer.clear();
-			while(inputBuffer.hasRemaining()) deviceInput.read(inputBuffer);
+			while (inputBuffer.hasRemaining()) deviceInput.read(inputBuffer);
 			
 			/* We want to read now */
 			inputBuffer.flip();
 			
 			/* Delegate parsing to InputEvent.parse() */
 			return InputEvent.parse(inputBuffer.asShortBuffer(), device);
-		} catch (IOException e ) { 
+		} catch (IOException e) { 
+			System.err.println("IOException: " + e);
+			e.printStackTrace();
 			return null;
 		}
 	}
