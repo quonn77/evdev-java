@@ -1,7 +1,9 @@
 apply plugin: 'groovy'
 apply plugin: 'osgi'
+apply plugin: 'maven'
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 }
 
