@@ -31,11 +31,12 @@ public class InputEvent {
 	/**
 	 * size of the input_event struct in bytes.
 	 */
-	public static final int STRUCT_SIZE_BYTES = 16;
+	public static final int STRUCT_SIZE_BYTES = 24;
 	
 	/*
 	 * Event types
 	 */
+
 	public static final short EV_SYN = 0x00;
 	public static final short EV_KEY = 0x01;
 	public static final short EV_REL = 0x02;
@@ -801,18 +802,22 @@ public class InputEvent {
 	 */
 	public static InputEvent parse(ShortBuffer shortBuffer, String source) throws IOException {
 		InputEvent e = new InputEvent();
-		short a,b;
+		short a,b,c,d;
 		a=shortBuffer.get();
 		b=shortBuffer.get();
-		e.time_sec = (b<<16) | a;
+		c=shortBuffer.get();
+		d=shortBuffer.get();
+		e.time_sec = (d<<48) | (c<<32) | (b<<16) | a;
 		a=shortBuffer.get();
 		b=shortBuffer.get();
-		e.time_usec = (b<<16) | a;
+		c=shortBuffer.get();
+		d=shortBuffer.get();
+		e.time_usec = (d<<48) | (c<<32) | (b<<16) | a;
 		e.type = shortBuffer.get();
 		e.code = shortBuffer.get();
-		a=shortBuffer.get();
-		b=shortBuffer.get();
-		e.value = (b<<16) | a;
+		c=shortBuffer.get();
+		d=shortBuffer.get();
+		e.value = (d<<16) | c;
 		e.source = source;
 		return e;
 	}
