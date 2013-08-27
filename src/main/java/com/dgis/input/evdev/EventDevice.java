@@ -114,6 +114,9 @@ interface IEventDevice {
 
 public class EventDevice implements IEventDevice{
 
+	/** system architecture, for arch-specific struct handling */
+	private String arch = "amd64";
+
 	/**
 	 * Notify these guys about input events.
 	 */
@@ -128,7 +131,7 @@ public class EventDevice implements IEventDevice{
 	 * Attached to device we're using.
 	 */
 	private FileChannel deviceInput;
-	private ByteBuffer inputBuffer = ByteBuffer.allocate(InputEvent.STRUCT_SIZE_BYTES);
+	private ByteBuffer inputBuffer;
 
 	
 	/**
@@ -166,7 +169,13 @@ public class EventDevice implements IEventDevice{
 	 */
 	public EventDevice(String device) throws IOException {
 		// check for embedded library:
-		String libPath = "/NATIVE/arm/libevdev-java.so";
+		arch = System.getProperty("os.arch");
+		if (arch.equals("arm")) {
+ 			inputBuffer = ByteBuffer.allocate(InputEvent.STRUCT_SIZE_BYTES_ARM);
+		} else {
+ 			inputBuffer = ByteBuffer.allocate(InputEvent.STRUCT_SIZE_BYTES);
+		}
+		String libPath = "/NATIVE/" + arch + "/libevdev-java.so";
 		InputStream in = this.getClass().getResourceAsStream(libPath);
 		if (in != null) {
 			final File nativeLibFile = File.createTempFile("libevdev-java", ".so");
@@ -289,12 +298,21 @@ public class EventDevice implements IEventDevice{
 			/* Read exactly the amount of bytes specified by InputEvent.STRUCT_SIZE_BYTES (intrinsic size of inputBuffer)*/
 			inputBuffer.clear();
 			while (inputBuffer.hasRemaining()) deviceInput.read(inputBuffer);
-			
+
+/*
+			byte[] bytes = inputBuffer.array();
+			StringBuilder sb = new StringBuilder();
+			for (byte b : bytes) {
+				sb.append(String.format("%02X ", b));
+			}
+			System.out.println("Buffer: " + sb.toString());
+*/
+
 			/* We want to read now */
 			inputBuffer.flip();
 			
 			/* Delegate parsing to InputEvent.parse() */
-			return InputEvent.parse(inputBuffer.asShortBuffer(), device);
+			return InputEvent.parse(inputBuffer.asShortBuffer(), device, arch);
 		} catch (IOException e) { 
 			System.err.println("IOException: " + e);
 			e.printStackTrace();

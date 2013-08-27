@@ -32,6 +32,7 @@ public class InputEvent {
 	 * size of the input_event struct in bytes.
 	 */
 	public static final int STRUCT_SIZE_BYTES = 24;
+	public static final int STRUCT_SIZE_BYTES_ARM = 16;
 	
 	/*
 	 * Event types
@@ -793,26 +794,47 @@ public class InputEvent {
 	public /*__u16*/ short code;
 	public /*__s32*/ int value;
 	public String source;
-	
+
 	/**
 	 * Parse an InputEvent out of a ShortBuffer.
 	 * @param shortBuffer
+	 * @param source
 	 * @return the parsed InputEvent
 	 * @throws IOException
 	 */
 	public static InputEvent parse(ShortBuffer shortBuffer, String source) throws IOException {
+		return parse(shortBuffer, source, null);
+	}
+
+	/**
+	 * Parse an InputEvent out of a ShortBuffer.
+	 * @param shortBuffer
+	 * @param source
+	 * @param arch
+	 * @return the parsed InputEvent
+	 * @throws IOException
+	 */
+	public static InputEvent parse(ShortBuffer shortBuffer, String source, String arch) throws IOException {
 		InputEvent e = new InputEvent();
 		short a,b,c,d;
 		a=shortBuffer.get();
 		b=shortBuffer.get();
-		c=shortBuffer.get();
-		d=shortBuffer.get();
-		e.time_sec = (d<<48) | (c<<32) | (b<<16) | a;
+		if (arch.equals("arm")) {
+			e.time_sec = (b<<16) | a;
+		} else {
+			c=shortBuffer.get();
+			d=shortBuffer.get();
+			e.time_sec = (d<<48) | (c<<32) | (b<<16) | a;
+		}
 		a=shortBuffer.get();
 		b=shortBuffer.get();
-		c=shortBuffer.get();
-		d=shortBuffer.get();
-		e.time_usec = (d<<48) | (c<<32) | (b<<16) | a;
+		if (arch.equals("arm")) {
+			e.time_usec = (b<<16) | a;
+		} else {
+			c=shortBuffer.get();
+			d=shortBuffer.get();
+			e.time_usec = (d<<48) | (c<<32) | (b<<16) | a;
+		}
 		e.type = shortBuffer.get();
 		e.code = shortBuffer.get();
 		c=shortBuffer.get();
