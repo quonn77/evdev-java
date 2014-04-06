@@ -13,7 +13,7 @@ dependencies {
 }
 
 version = '0.1-SNAPSHOT'
-group = 'com.xoeye.runtime'
+group = 'com.dgis.input'
 
 jar {
 	manifest {
@@ -21,4 +21,8 @@ jar {
 		instruction 'Bundle-Vendor', 'XOEye Technologies'
 		instruction 'Bundle-Description', 'Evdev native JNI library'
 	}
+}
+
+artifacts {
+	runtime jar
 }

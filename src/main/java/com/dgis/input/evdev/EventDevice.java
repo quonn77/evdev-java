@@ -170,13 +170,16 @@ public class EventDevice implements IEventDevice{
 	public EventDevice(String device) throws IOException {
 		// check for embedded library:
 		arch = System.getProperty("os.arch");
+		System.err.println("EventDevice: System: " + arch);
 		if (arch.equals("arm")) {
  			inputBuffer = ByteBuffer.allocate(InputEvent.STRUCT_SIZE_BYTES_ARM);
 		} else {
  			inputBuffer = ByteBuffer.allocate(InputEvent.STRUCT_SIZE_BYTES);
 		}
 		String libPath = "/NATIVE/" + arch + "/libevdev-java.so";
+		System.err.println("EventDevice: libPath: " + libPath);
 		InputStream in = this.getClass().getResourceAsStream(libPath);
+		System.err.println("EventDevice: in: " + in);
 		if (in != null) {
 			final File nativeLibFile = File.createTempFile("libevdev-java", ".so");
 			nativeLibFile.deleteOnExit();
@@ -193,6 +196,7 @@ public class EventDevice implements IEventDevice{
 
 			System.load(nativeLibFile.getAbsolutePath());
 		} else {
+			System.err.println("EventDevice: falling back to java.library.path...");
 			System.loadLibrary("evdev-java");
 		}
 		this.device = device;
