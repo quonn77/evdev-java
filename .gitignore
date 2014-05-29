@@ -3,4 +3,12 @@ bin
 *.dll
 .gradle
 build
+*.swp
+.idea
+*.ipr
+*.iws
+*.iml
+out/
+classes/
+.DS_STORE
 
