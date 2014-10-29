@@ -1,9 +1,8 @@
-package com.dgis.input.evdev.devices;
+package com.dgis.input.evdev;
 
 import com.dgis.input.evdev.EventDevice;
 import com.dgis.input.evdev.InputEvent;
 import com.dgis.input.evdev.InputListener;
-import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
