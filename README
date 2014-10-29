@@ -4,8 +4,8 @@
 WHAT IS IT
 
 This is a java API for the Linux evdev system. Evdev (event device) is used
-by the kernel to provide "input events" from input devices to userspace. Input
-devices include anything from keyboard and mice to joysticks to hardware buttons
+by the kernel to provide "input events" from input com.dgis.input.evdev.devices to userspace. Input
+com.dgis.input.evdev.devices include anything from keyboard and mice to joysticks to hardware buttons
 (power, hibernate, laptop buttons), even soundcards (some recent ones generate
 events upon a jack being plugged).
 
@@ -13,8 +13,8 @@ RATIONALE
 
 One of my free-time projects is creating a full-featured Car PC system. Among
 other things, the system needed a solid method of getting input from many
-devices. Some were obvious (keyboard, touch-screen), while others not so much
-(custom panel buttons, sensors, etc). Since most devices already had an evdev
+com.dgis.input.evdev.devices. Some were obvious (keyboard, touch-screen), while others not so much
+(custom panel buttons, sensors, etc). Since most com.dgis.input.evdev.devices already had an evdev
 interface in the kernel, it was obvious that my system better take advantage
 of this fact. I could not find any Java interface to evdev, I decided to write
 my own, and here is a result.
@@ -31,7 +31,7 @@ written to take care of those.
 DRIVERS/FILTERS
 
 Raw InputEvents are fine for accomplishing more advanced features or for
-supporting a wide range of devices, but oftentimes a simpler interface is
+supporting a wide range of com.dgis.input.evdev.devices, but oftentimes a simpler interface is
 desired (along with a reduced risk of error, yay for compiler error messages!).
 Thus, evdev-java provides a driver/filter system. These implementations sit on
 top of EventDevice and forward (and generate) device-specific events. At the
@@ -68,4 +68,3 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
- 

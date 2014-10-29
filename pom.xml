@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ch.ledcom</groupId>
+        <artifactId>ledcom-parent-pom</artifactId>
+        <version>1.51</version>
+    </parent>
+
+    <groupId>ch.ledcom.evdev</groupId>
+    <artifactId>evdev-java</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <url>http://gehel.github.com/evdev-java/</url>
+    <inceptionYear>2009</inceptionYear>
+
+    <modules>
+        <module>evdev-native</module>
+        <module>evdev-native-interface</module>
+        <module>evdev</module>
+    </modules>
+
+    <scm>
+        <connection>scm:git:git://github.com/gehel/evdev-java.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/gehel/evdev-java.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>https://github.com/gehel/evdev-java</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/gehel/evdev-java/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>travis</system>
+        <url>https://travis-ci.org/gehel/evdev-java</url>
+    </ciManagement>
+
+    <properties>
+        <verify.checkstyle.max.violations>359</verify.checkstyle.max.violations>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <configuration>
+                        <header>com/mycila/maven/plugin/license/templates/GPL-3.txt</header>
+                        <properties>
+                            <year>${project.inceptionYear}</year>
+                            <owner>Giacomo Ferrari</owner>
+                            <email>http://giferrari.net/blog/</email>
+                        </properties>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <configuration>
+                        <suppressionsLocation>src/etc/checkstyle-suppressions.xml</suppressionsLocation>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <configuration>
+                        <check>
+                            <branchRate>0</branchRate>
+                            <lineRate>0</lineRate>
+                            <totalBranchRate>0</totalBranchRate>
+                            <totalLineRate>0</totalLineRate>
+                            <packageBranchRate>0</packageBranchRate>
+                            <packageLineRate>0</packageLineRate>
+                        </check>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <executions>
+                        <execution>
+                            <id>pitest</id>
+                            <phase>none</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

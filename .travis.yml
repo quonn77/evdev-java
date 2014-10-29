@@ -1,0 +1,19 @@
+language: java
+jdk:
+  - openjdk7
+install: "mvn install -Dmaven.javadoc.skip=true -Dcobertura.skip=true -B -V"
+before_script: "git clone -b travis `git config --get remote.origin.url` target/travis"
+script: "mvn deploy --settings target/travis/settings.xml -B -V"
+after_success:
+  - "mvn site --settings target/travis/settings.xml -B -V"
+branches:
+  except:
+    - travis
+    - gh-pages
+cache:
+  directories:
+  - $HOME/.m2
+env:
+  global:
+    - secure: "dEQ45kADimiVlBcOUcfreTLL1IpLzkOvFE/J8LzK4BI0C6KS3XNKhEErvXmJ7sa5J4K0PhyHYAqrxS53J2kk0til0iPRGv4sZlBxIhA5jJScXxS2JmFqQLyaxttquC9TO6lazan2iK8nZlaOix5b29JSqOY/2SfIYx8v7uYRt2Q="
+    - secure: "JNNxKdcCihOT/zj8qH2D+5fHNSSYURpSnxvkioZuBhBDQyNXt3njljYqqET/WYf1ZsEa3/Pe9BxmO1DYy1bYB68mv1AD3NdSSnzSFylQg8uzBomht9qcpUaZk/izqhBIgxFyqex8NEZvrqd+oIjvJKEwSn+zZNcr2S54uuH96/o="
