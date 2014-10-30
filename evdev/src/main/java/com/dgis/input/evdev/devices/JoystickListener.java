@@ -32,7 +32,7 @@ public interface JoystickListener {
      * @param axesChanged Bitmap of axis status. If the nth value in this array is true, then the nth axis changed state.
      * @param state       The updated joystick state.
      */
-    public void joystickMoved(boolean[] axesChanged, JoystickState state, String source);
+    void joystickMoved(boolean[] axesChanged, JoystickState state, String source);
 
     /**
      * Called whenever a joystick's button changes state.
@@ -40,5 +40,5 @@ public interface JoystickListener {
      * @param buttonsChanged Bitmap of button status. If the nth value in this array is true, then the nth button changed state.
      * @param state          The updated joystick state.
      */
-    public void buttonChanged(boolean[] buttonsChanged, JoystickState state, String source);
+    void buttonChanged(boolean[] buttonsChanged, JoystickState state, String source);
 }

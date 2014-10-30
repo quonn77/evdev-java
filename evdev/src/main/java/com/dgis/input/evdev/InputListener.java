@@ -32,5 +32,5 @@ public interface InputListener {
      *
      * @param e The event details.
      */
-    public void event(InputEvent e);
+    void event(InputEvent e);
 }

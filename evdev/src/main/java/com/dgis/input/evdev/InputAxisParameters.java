@@ -27,24 +27,24 @@ package com.dgis.input.evdev;
 
 interface InputAxisParameters {
 
-    public int getValue();
+    int getValue();
 
-    public void setValue(int value);
+    void setValue(int value);
 
-    public int getMin();
+    int getMin();
 
-    public void setMin(int min);
+    void setMin(int min);
 
-    public int getMax();
+    int getMax();
 
-    public void setMax(int max);
+    void setMax(int max);
 
-    public int getFuzz();
+    int getFuzz();
 
-    public void setFuzz(int fuzz);
+    void setFuzz(int fuzz);
 
-    public int getFlat();
+    int getFlat();
 
-    public void setFlat(int flat);
+    void setFlat(int flat);
 
 }
