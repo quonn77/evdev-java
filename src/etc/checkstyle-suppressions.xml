@@ -23,6 +23,6 @@
 
 <suppressions>
     <suppress
-            checks="JavadocStyleCheck|JavadocMethodCheck|JavadocTypeCheck|JavadocVariableCheck|LineLength|FinalParameters|AvoidStarImport|DesignForExtension"
+            checks="HiddenField|JavadocStyleCheck|JavadocMethodCheck|JavadocTypeCheck|JavadocVariableCheck|LineLength|FinalParameters|AvoidStarImport|DesignForExtension"
             files=".*"/>
 </suppressions>

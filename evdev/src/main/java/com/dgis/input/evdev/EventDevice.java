@@ -16,6 +16,9 @@
  */
 package com.dgis.input.evdev;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,6 +34,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Represents a connection to a Linux Evdev device.
@@ -44,6 +48,8 @@ import java.util.Map;
  */
 public class EventDevice {
 
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     private final NativeEventDevice nativeEventDevice;
 
     /** system architecture, for arch-specific struct handling */
@@ -52,7 +58,7 @@ public class EventDevice {
     /**
      * Notify these guys about input events.
      */
-    private List<InputListener> listeners = new ArrayList<InputListener>();
+    private final List<InputListener> listeners = new CopyOnWriteArrayList<>();
 
     /**
      * Device filename we're using.
@@ -91,7 +97,7 @@ public class EventDevice {
     /**
      * Ensures only one instance of InputAxisParameters is created for each axis (more would be wasteful).
      */
-    private HashMap<Integer, InputAxisParameters> axisParams = new HashMap<Integer, InputAxisParameters>();
+    private HashMap<Integer, InputAxisParameters> axisParams = new HashMap<>();
 
     /**
      * Create an EventDevice by connecting to the provided device filename.
@@ -103,17 +109,16 @@ public class EventDevice {
     public EventDevice(String device) throws IOException {
         // check for embedded library:
         arch = System.getProperty("os.arch");
-        System.err.println("EventDevice: System: " + arch);
+        logger.info("EventDevice: System: {}", arch);
         if (arch.equals("arm")) {
             inputBuffer = ByteBuffer.allocate(InputEvent.STRUCT_SIZE_BYTES_ARM);
         } else {
             inputBuffer = ByteBuffer.allocate(InputEvent.STRUCT_SIZE_BYTES);
         }
-        String libPath = "/NATIVE/" + arch + "/libevdev-java.so";
-        libPath = "/evdev-native.so";
-        System.err.println("EventDevice: libPath: " + libPath);
+        String libPath = "/evdev-native.so";
+        logger.info("EventDevice: libPath: {}", libPath);
         InputStream in = EventDevice.class.getResourceAsStream(libPath);
-        System.err.println("EventDevice: in: " + in);
+        logger.info("EventDevice: in: {}", in);
         if (in != null) {
             final File nativeLibFile = File.createTempFile("libevdev-java", ".so");
             nativeLibFile.deleteOnExit();
@@ -130,7 +135,7 @@ public class EventDevice {
 
             System.load(nativeLibFile.getAbsolutePath());
         } else {
-            System.err.println("EventDevice: falling back to java.library.path...");
+            logger.warn("EventDevice: falling back to java.library.path.");
             System.loadLibrary("evdev-java");
         }
         this.device = device;
@@ -146,7 +151,7 @@ public class EventDevice {
      */
     private void initDevice() throws IOException {
         if (!nativeEventDevice.ioctlGetID(device, idResponse)) {
-            System.err.println("WARN: couldn't get device ID: " + device);
+            logger.error("WARN: couldn't get device ID: {}", device);
             Arrays.fill(idResponse, (short) 0);
         }
         evdevVersionResponse = nativeEventDevice.ioctlGetEvdevVersion(device);
@@ -154,7 +159,7 @@ public class EventDevice {
         if (nativeEventDevice.ioctlGetDeviceName(device, devName)) {
             deviceNameResponse = new String(devName);
         } else {
-            System.err.println("WARN: couldn't get device name: " + device);
+            logger.error("WARN: couldn't get device name: {}", device);
             deviceNameResponse = "Unknown Device";
         }
 
@@ -222,13 +227,11 @@ public class EventDevice {
     /**
      * Distribute an event to all registered listeners.
      *
-     * @param ev The event to distribute.
+     * @param inputEvent The event to distribute.
      */
-    private void distributeEvent(InputEvent ev) {
-        synchronized (listeners) {
-            for (InputListener il : listeners) {
-                il.event(ev);
-            }
+    private void distributeEvent(InputEvent inputEvent) {
+        for (InputListener listener : listeners) {
+            listener.event(inputEvent);
         }
     }
 
@@ -249,8 +252,7 @@ public class EventDevice {
             /* Delegate parsing to InputEvent.parse() */
             return InputEvent.parse(inputBuffer.asShortBuffer(), device, arch);
         } catch (IOException e) {
-            System.err.println("IOException: " + e);
-            e.printStackTrace();
+            logger.error("Cannot read event", e);
             return null;
         }
     }
@@ -260,12 +262,12 @@ public class EventDevice {
         try {
             readerThread.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error("Interrupted in close", e);
         }
         try {
             deviceInput.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error in close", e);
         }
     }
 
@@ -300,24 +302,19 @@ public class EventDevice {
     public InputAxisParameters getAxisParameters(int axis) {
         InputAxisParameters params;
         if ((params = axisParams.get(axis)) == null) {
-            params = new InputAxisParametersImpl(this, axis);
+            params = new InputAxisParameters(this, axis);
             axisParams.put(axis, params);
         }
         return params;
     }
 
-    public void addListener(InputListener list) {
-        synchronized (listeners) {
-            listeners.add(list);
-        }
+    public void addListener(InputListener listener) {
+        listeners.add(listener);
     }
 
-    public void removeListener(InputListener list) {
-        synchronized (listeners) {
-            listeners.remove(list);
-        }
+    public void removeListener(InputListener listener) {
+        listeners.remove(listener);
     }
-
 
     public String getDevicePath() {
         return device;

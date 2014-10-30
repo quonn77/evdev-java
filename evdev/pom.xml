@@ -29,7 +29,9 @@
     <name>evdev-java - Java implementation</name>
 
     <properties>
-        <verify.checkstyle.max.violations>72</verify.checkstyle.max.violations>
+        <verify.checkstyle.max.violations>59</verify.checkstyle.max.violations>
+        <verify.coverage.threshold>94</verify.coverage.threshold>
+        <verify.mutation.threshold>9</verify.mutation.threshold>
     </properties>
 
     <dependencies>
@@ -44,18 +46,67 @@
             <artifactId>evdev-native-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+        </dependency>
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.github.github</groupId>
+                    <artifactId>site-maven-plugin</artifactId>
+                    <configuration>
+                        <merge>true</merge>
+                        <path>${project.artifactId}</path>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <configuration>
+                        <check>
+                            <branchRate>0</branchRate>
+                            <lineRate>0</lineRate>
+                            <totalBranchRate>4</totalBranchRate>
+                            <totalLineRate>13</totalLineRate>
+                            <packageBranchRate>0</packageBranchRate>
+                            <packageLineRate>0</packageLineRate>
+                        </check>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <configuration>
+                        <effort>Max</effort>
+                        <threshold>Low</threshold>
+                        <xmlOutput>true</xmlOutput>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <phase>none</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <configuration>
+                        <targetClasses>
+                            <param>com.dgis.input.evdev*</param>
+                        </targetClasses>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <configuration>
-                    <merge>true</merge>
-                    <path>${project.artifactId}</path>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -99,24 +150,6 @@
                                 </resource>
                             </resources>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <effort>Max</effort>
-                    <threshold>Low</threshold>
-                    <xmlOutput>true</xmlOutput>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <phase>none</phase>
                     </execution>
                 </executions>
             </plugin>

@@ -796,12 +796,21 @@ public class InputEvent {
     public static final short FF_STATUS_MAX = 0x01;
 
 
-    public long time_sec;
-    public long time_usec;
-    public /*__u16*/ short type;
-    public /*__u16*/ short code;
-    public /*__s32*/ int value;
-    public String source;
+    public final long timeSec;
+    public final long timeMicroSec;
+    public final /*__u16*/ short type;
+    public final /*__u16*/ short code;
+    public final /*__s32*/ int value;
+    public final String source;
+
+    public InputEvent(long timeSec, long timeMicroSec, short type, short code, int value, String source) {
+        this.timeSec = timeSec;
+        this.timeMicroSec = timeMicroSec;
+        this.type = type;
+        this.code = code;
+        this.value = value;
+        this.source = source;
+    }
 
     /**
      * Parse an InputEvent out of a ShortBuffer.
@@ -825,43 +834,42 @@ public class InputEvent {
      * @throws IOException
      */
     public static InputEvent parse(ShortBuffer shortBuffer, String source, String arch) throws IOException {
-        InputEvent e = new InputEvent();
         short a, b, c, d;
         a = shortBuffer.get();
         b = shortBuffer.get();
+        long timeSec;
         if (arch.equals("arm")) {
-            e.time_sec = (b << 16) | a;
+            timeSec = (b << 16) | a;
         } else {
             c = shortBuffer.get();
             d = shortBuffer.get();
-            e.time_sec = (d << 48) | (c << 32) | (b << 16) | a;
+            timeSec = ((long)d << 48) | ((long)c << 32) | ((long)b << 16) | a;
         }
         a = shortBuffer.get();
         b = shortBuffer.get();
+        long timeMicroSec;
         if (arch.equals("arm")) {
-            e.time_usec = (b << 16) | a;
+            timeMicroSec = (b << 16) | a;
         } else {
             c = shortBuffer.get();
             d = shortBuffer.get();
-            e.time_usec = (d << 48) | (c << 32) | (b << 16) | a;
+            // fixme : longs are signed, so this is probably not doing what we expect it to do
+            timeMicroSec = (d << 48) | (c << 32) | (b << 16) | a;
         }
-        e.type = shortBuffer.get();
-        e.code = shortBuffer.get();
+        short type = shortBuffer.get();
+        short code = shortBuffer.get();
         c = shortBuffer.get();
         d = shortBuffer.get();
-        e.value = (d << 16) | c;
-        e.source = source;
-        return e;
-    }
+        int value = (d << 16) | c;
 
-    private InputEvent() {
+        return new InputEvent(timeSec, timeMicroSec, type, code, value, source);
     }
 
     @Override
     public String toString() {
         //TODO Java sucks at printing unsigned longs. Dur...
         return String.format("Event: time %d.%06d, type %d, code %d, value %02x",
-                time_sec, time_usec, type, code, value);
+                timeSec, timeMicroSec, type, code, value);
     }
 
 }

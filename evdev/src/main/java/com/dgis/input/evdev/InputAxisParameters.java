@@ -16,6 +16,8 @@
  */
 package com.dgis.input.evdev;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * Represents configurable parameters of an input axis. set*() should affect the value in the device.
  * <p/>
@@ -23,27 +25,57 @@ package com.dgis.input.evdev;
  *
  * @author Giacomo Ferrari
  */
+@ThreadSafe
+class InputAxisParameters {
 
-interface InputAxisParameters {
+    private final EventDevice device;
+    private final int axis;
 
-    int getValue();
+    private static final int VALUE_INDEX = 0;
+    private static final int MIN_INDEX = 1;
+    private static final int MAX_INDEX = 2;
+    private static final int FUZZ_INDEX = 3;
+    private static final int FLAT_INDEX = 4;
 
-    void setValue(int value);
+    public InputAxisParameters(EventDevice device, int axis) {
+        this.device = device;
+        this.axis = axis;
+    }
 
-    int getMin();
+    private int readStatus(int i) {
+        if (i < 0 || i > 4) {
+            throw new IllegalArgumentException("Field index has to be between 0 and 4");
+        }
+        int[] resp = new int[5];
+        synchronized (this) {
+            device.ioctlEVIOCGABS(device.getDevicePath(), resp, axis);
+        }
+        return resp[i];
+    }
 
-    void setMin(int min);
+    public int getValue() {
+        return readStatus(VALUE_INDEX);
+    }
 
-    int getMax();
+    public int getMin() {
+        return readStatus(MIN_INDEX);
+    }
 
-    void setMax(int max);
+    public int getMax() {
+        return readStatus(MAX_INDEX);
+    }
 
-    int getFuzz();
+    public int getFuzz() {
+        return readStatus(FUZZ_INDEX);
+    }
 
-    void setFuzz(int fuzz);
+    public int getFlat() {
+        return readStatus(FLAT_INDEX);
+    }
 
-    int getFlat();
-
-    void setFlat(int flat);
-
+    @Override
+    public String toString() {
+        return "Value: " + getValue() + " Min: " + getMin() + " Max: "
+                + getMax() + " Fuzz: " + getFuzz() + " Flat: " + getFlat();
+    }
 }
