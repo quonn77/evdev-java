@@ -19,20 +19,20 @@ under the License.
 -->
 <rss version="0.91">
   <channel>
-    <title>evdev-java - Checkstyle report</title>
-    <link>http://gehel.github.com/evdev-java/</link>
-    <description>evdev-java - Checkstyle report</description>
+    <title>evdev-native-interface - Checkstyle report</title>
+    <link>http://gehel.github.com/evdev-java/evdev-native-interface/</link>
+    <description>evdev-native-interface - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2009 - 2014 LedCom</copyright>
     <item>
-      <title>File: 11,
-             Errors: 341,
+      <title>File: 1,
+             Errors: 6,
              Warnings: 0,
              Infos: 0
       </title>
-            <link>http://gehel.github.com/evdev-java//checkstyle.html</link>
+            <link>http://gehel.github.com/evdev-java/evdev-native-interface//checkstyle.html</link>
       <description>
-        <p>Click <a href="http://gehel.github.com/evdev-java//checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="http://gehel.github.com/evdev-java/evdev-native-interface//checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -46,91 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.InputListener.java">com/dgis/input/evdev/InputListener.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  2
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.EventDevice.java">com/dgis/input/evdev/EventDevice.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  35
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.InputAxisParametersImpl.java">com/dgis/input/evdev/InputAxisParametersImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  10
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.InputEvent.java">com/dgis/input/evdev/InputEvent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  229
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.devices.EvdevJoystickFilter.java">com/dgis/input/evdev/devices/EvdevJoystickFilter.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  13
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.devices.JoystickState.java">com/dgis/input/evdev/devices/JoystickState.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  21
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.NativeEventDevice.java">com/dgis/input/evdev/NativeEventDevice.java</a>
+                  <a href="http://gehel.github.com/evdev-java/evdev-native-interface//checkstyle.html#com.dgis.input.evdev.NativeEventDevice.java">com/dgis/input/evdev/NativeEventDevice.java</a>
                 </td>
                 <td>
                   0
@@ -140,62 +56,6 @@ under the License.
                 </td>
                 <td>
                   6
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.EvdevTest.java">com/dgis/input/evdev/EvdevTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  8
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.devices.EvdevJoystickTest.java">com/dgis/input/evdev/devices/EvdevJoystickTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  5
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.InputAxisParameters.java">com/dgis/input/evdev/InputAxisParameters.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  10
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.devices.JoystickListener.java">com/dgis/input/evdev/devices/JoystickListener.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  2
                 </td>
               </tr>
                       </tbody>
