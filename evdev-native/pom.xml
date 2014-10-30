@@ -8,9 +8,9 @@
     </parent>
 
     <artifactId>evdev-native</artifactId>
-    <name>evdev-java - Native implementation</name>
 
     <packaging>so</packaging>
+    <name>evdev-java - Native implementation</name>
 
     <dependencies>
         <dependency>

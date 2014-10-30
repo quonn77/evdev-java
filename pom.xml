@@ -39,9 +39,6 @@
         <url>https://travis-ci.org/gehel/evdev-java</url>
     </ciManagement>
 
-    <properties>
-        <verify.checkstyle.max.violations>359</verify.checkstyle.max.violations>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>

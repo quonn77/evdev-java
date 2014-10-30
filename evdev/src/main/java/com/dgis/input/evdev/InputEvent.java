@@ -35,9 +35,7 @@ public class InputEvent {
     public static final int STRUCT_SIZE_BYTES = 24;
     public static final int STRUCT_SIZE_BYTES_ARM = 16;
 
-	/*
-	 * Event types
-	 */
+     /* Event types */
 
     public static final short EV_SYN = 0x00;
     public static final short EV_KEY = 0x01;
@@ -54,9 +52,7 @@ public class InputEvent {
     public static final short EV_MAX = 0x1f;
     public static final short EV_CNT = (EV_MAX + 1);
 
-	/*
-	 * Synchronization events.
-	 */
+	/* Synchronization events. */
 
     public static final short SYN_REPORT = 0;
     public static final short SYN_CONFIG = 1;
@@ -302,21 +298,20 @@ public class InputEvent {
     public static final short KEY_BRIGHTNESSUP = 225;
     public static final short KEY_MEDIA = 226;
 
-    public static final short KEY_SWITCHVIDEOMODE = 227;/*
-														 * Cycle between
-														 * available video
-														 * outputs
-														 * (Monitor/LCD/TV
-														 * -out/etc)
-														 */
+    /** Cycle between available video outputs (Monitor/LCD/TV-out/etc) */
+    public static final short KEY_SWITCHVIDEOMODE = 227;
     public static final short KEY_KBDILLUMTOGGLE = 228;
     public static final short KEY_KBDILLUMDOWN = 229;
     public static final short KEY_KBDILLUMUP = 230;
 
-    public static final short KEY_SEND = 231;/* AC Send */
-    public static final short KEY_REPLY = 232;/* AC Reply */
-    public static final short KEY_FORWARDMAIL = 233;/* AC Forward Msg */
-    public static final short KEY_SAVE = 234;/* AC Save */
+    /** AC Send */
+    public static final short KEY_SEND = 231;
+    /** AC Reply */
+    public static final short KEY_REPLY = 232;
+    /** AC Forward Msg */
+    public static final short KEY_FORWARDMAIL = 233;
+    /** AC Save */
+    public static final short KEY_SAVE = 234;
     public static final short KEY_DOCUMENTS = 235;
 
     public static final short KEY_BATTERY = 236;
@@ -327,23 +322,16 @@ public class InputEvent {
 
     public static final short KEY_UNKNOWN = 240;
 
-    public static final short KEY_VIDEO_NEXT = 241;/* drive next video source */
-    public static final short KEY_VIDEO_PREV = 242;/*
-													 * drive previous video
-													 * source
-													 */
-    public static final short KEY_BRIGHTNESS_CYCLE = 243;/*
-														 * brightness up, after
-														 * max is min
-														 */
-    public static final short KEY_BRIGHTNESS_ZERO = 244;/*
-														 * brightness off, use
-														 * ambient
-														 */
-    public static final short KEY_DISPLAY_OFF = 245;/*
-													 * display device to off
-													 * state
-													 */
+    /** drive next video source */
+    public static final short KEY_VIDEO_NEXT = 241;
+    /** drive previous video source */
+    public static final short KEY_VIDEO_PREV = 242;
+    /** brightness up, after max is min */
+    public static final short KEY_BRIGHTNESS_CYCLE = 243;
+    /** brightness off, use ambient */
+    public static final short KEY_BRIGHTNESS_ZERO = 244;
+    /** display device to off state */
+    public static final short KEY_DISPLAY_OFF = 245;
 
     public static final short KEY_WIMAX = 246;
 
@@ -417,10 +405,8 @@ public class InputEvent {
     public static final short BTN_STYLUS2 = 0x14c;
     public static final short BTN_TOOL_DOUBLETAP = 0x14d;
     public static final short BTN_TOOL_TRIPLETAP = 0x14e;
-    public static final short BTN_TOOL_QUADTAP = 0x14f;/*
-														 * Four fingers on
-														 * trackpad
-														 */
+    /** Four fingers on trackpad */
+    public static final short BTN_TOOL_QUADTAP = 0x14f;
 
     public static final short BTN_WHEEL = 0x150;
     public static final short BTN_GEAR_DOWN = 0x150;
@@ -432,15 +418,18 @@ public class InputEvent {
     public static final short KEY_CLEAR = 0x163;
     public static final short KEY_POWER2 = 0x164;
     public static final short KEY_OPTION = 0x165;
-    public static final short KEY_INFO = 0x166;/* AL OEM Features/Tips/Tutorial */
+    /** AL OEM Features/Tips/Tutorial */
+    public static final short KEY_INFO = 0x166;
     public static final short KEY_TIME = 0x167;
     public static final short KEY_VENDOR = 0x168;
     public static final short KEY_ARCHIVE = 0x169;
-    public static final short KEY_PROGRAM = 0x16a;/* Media Select Program Guide */
+    /** Media Select Program Guide */
+    public static final short KEY_PROGRAM = 0x16a;
     public static final short KEY_CHANNEL = 0x16b;
     public static final short KEY_FAVORITES = 0x16c;
     public static final short KEY_EPG = 0x16d;
-    public static final short KEY_PVR = 0x16e;/* Media Select Home */
+    /** Media Select Home */
+    public static final short KEY_PVR = 0x16e;
     public static final short KEY_MHP = 0x16f;
     public static final short KEY_LANGUAGE = 0x170;
     public static final short KEY_TITLE = 0x171;
@@ -450,36 +439,50 @@ public class InputEvent {
     public static final short KEY_MODE = 0x175;
     public static final short KEY_KEYBOARD = 0x176;
     public static final short KEY_SCREEN = 0x177;
-    public static final short KEY_PC = 0x178;/* Media Select Computer */
-    public static final short KEY_TV = 0x179;/* Media Select TV */
-    public static final short KEY_TV2 = 0x17a;/* Media Select Cable */
-    public static final short KEY_VCR = 0x17b;/* Media Select VCR */
-    public static final short KEY_VCR2 = 0x17c;/* VCR Plus */
-    public static final short KEY_SAT = 0x17d;/* Media Select Satellite */
+    /** Media Select Computer */
+    public static final short KEY_PC = 0x178;
+    /** Media Select TV */
+    public static final short KEY_TV = 0x179;
+    /** Media Select Cable */
+    public static final short KEY_TV2 = 0x17a;
+    /** Media Select VCR */
+    public static final short KEY_VCR = 0x17b;
+    /** VCR Plus */
+    public static final short KEY_VCR2 = 0x17c;
+    /** Media Select Satellite */
+    public static final short KEY_SAT = 0x17d;
     public static final short KEY_SAT2 = 0x17e;
-    public static final short KEY_CD = 0x17f;/* Media Select CD */
-    public static final short KEY_TAPE = 0x180;/* Media Select Tape */
+    /** Media Select CD */
+    public static final short KEY_CD = 0x17f;
+    /** Media Select Tape */
+    public static final short KEY_TAPE = 0x180;
     public static final short KEY_RADIO = 0x181;
-    public static final short KEY_TUNER = 0x182;/* Media Select Tuner */
+    /** Media Select Tuner */
+    public static final short KEY_TUNER = 0x182;
     public static final short KEY_PLAYER = 0x183;
     public static final short KEY_TEXT = 0x184;
-    public static final short KEY_DVD = 0x185;/* Media Select DVD */
+    /** Media Select DVD */
+    public static final short KEY_DVD = 0x185;
     public static final short KEY_AUX = 0x186;
     public static final short KEY_MP3 = 0x187;
     public static final short KEY_AUDIO = 0x188;
     public static final short KEY_VIDEO = 0x189;
     public static final short KEY_DIRECTORY = 0x18a;
     public static final short KEY_LIST = 0x18b;
-    public static final short KEY_MEMO = 0x18c;/* Media Select Messages */
+    /** Media Select Messages */
+    public static final short KEY_MEMO = 0x18c;
     public static final short KEY_CALENDAR = 0x18d;
     public static final short KEY_RED = 0x18e;
     public static final short KEY_GREEN = 0x18f;
     public static final short KEY_YELLOW = 0x190;
     public static final short KEY_BLUE = 0x191;
-    public static final short KEY_CHANNELUP = 0x192;/* Channel Increment */
-    public static final short KEY_CHANNELDOWN = 0x193;/* Channel Decrement */
+    /** Channel Increment */
+    public static final short KEY_CHANNELUP = 0x192;
+    /** Channel Decrement */
+    public static final short KEY_CHANNELDOWN = 0x193;
     public static final short KEY_FIRST = 0x194;
-    public static final short KEY_LAST = 0x195;/* Recall Last */
+    /** Recall Last */
+    public static final short KEY_LAST = 0x195;
     public static final short KEY_AB = 0x196;
     public static final short KEY_NEXT = 0x197;
     public static final short KEY_RESTART = 0x198;
@@ -490,44 +493,53 @@ public class InputEvent {
     public static final short KEY_DIGITS = 0x19d;
     public static final short KEY_TEEN = 0x19e;
     public static final short KEY_TWEN = 0x19f;
-    public static final short KEY_VIDEOPHONE = 0x1a0;/* Media Select Video Phone */
-    public static final short KEY_GAMES = 0x1a1;/* Media Select Games */
-    public static final short KEY_ZOOMIN = 0x1a2;/* AC Zoom In */
-    public static final short KEY_ZOOMOUT = 0x1a3;/* AC Zoom Out */
-    public static final short KEY_ZOOMRESET = 0x1a4;/* AC Zoom */
-    public static final short KEY_WORDPROCESSOR = 0x1a5;/* AL Word Processor */
-    public static final short KEY_EDITOR = 0x1a6;/* AL Text Editor */
-    public static final short KEY_SPREADSHEET = 0x1a7;/* AL Spreadsheet */
-    public static final short KEY_GRAPHICSEDITOR = 0x1a8;/* AL Graphics Editor */
-    public static final short KEY_PRESENTATION = 0x1a9;/* AL Presentation App */
-    public static final short KEY_DATABASE = 0x1aa;/* AL Database App */
-    public static final short KEY_NEWS = 0x1ab;/* AL Newsreader */
-    public static final short KEY_VOICEMAIL = 0x1ac;/* AL Voicemail */
-    public static final short KEY_ADDRESSBOOK = 0x1ad;/* AL Contacts/Address Book */
-    public static final short KEY_MESSENGER = 0x1ae;/* AL Instant Messaging */
-    public static final short KEY_DISPLAYTOGGLE = 0x1af;/*
-														 * Turn display (LCD) on
-														 * and off
-														 */
-    public static final short KEY_SPELLCHECK = 0x1b0;/* AL Spell Check */
-    public static final short KEY_LOGOFF = 0x1b1;/* AL Logoff */
+    /** Media Select Video Phone */
+    public static final short KEY_VIDEOPHONE = 0x1a0;
+    /** Media Select Games */
+    public static final short KEY_GAMES = 0x1a1;
+    /** AC Zoom In */
+    public static final short KEY_ZOOMIN = 0x1a2;
+    /** AC Zoom Out */
+    public static final short KEY_ZOOMOUT = 0x1a3;
+    /** AC Zoom */
+    public static final short KEY_ZOOMRESET = 0x1a4;
+    /** AL Word Processor */
+    public static final short KEY_WORDPROCESSOR = 0x1a5;
+    /** AL Text Editor */
+    public static final short KEY_EDITOR = 0x1a6;
+    /** AL Spreadsheet */
+    public static final short KEY_SPREADSHEET = 0x1a7;
+    /** AL Graphics Editor */
+    public static final short KEY_GRAPHICSEDITOR = 0x1a8;
+    /** AL Presentation App */
+    public static final short KEY_PRESENTATION = 0x1a9;
+    /** AL Database App */
+    public static final short KEY_DATABASE = 0x1aa;
+    /** AL Newsreader */
+    public static final short KEY_NEWS = 0x1ab;
+    /** AL Voicemail */
+    public static final short KEY_VOICEMAIL = 0x1ac;
+    /** AL Contacts/Address Book */
+    public static final short KEY_ADDRESSBOOK = 0x1ad;
+    /** AL Instant Messaging */
+    public static final short KEY_MESSENGER = 0x1ae;
+    /** Turn display (LCD) on and off */
+    public static final short KEY_DISPLAYTOGGLE = 0x1af;
+    /** AL Spell Check */
+    public static final short KEY_SPELLCHECK = 0x1b0;
+    /** AL Logoff */
+    public static final short KEY_LOGOFF = 0x1b1;
 
     public static final short KEY_DOLLAR = 0x1b2;
     public static final short KEY_EURO = 0x1b3;
 
-    public static final short KEY_FRAMEBACK = 0x1b4;/*
-													 * Consumer - transport
-													 * controls
-													 */
+    /** Consumer - transport controls */
+    public static final short KEY_FRAMEBACK = 0x1b4;
     public static final short KEY_FRAMEFORWARD = 0x1b5;
-    public static final short KEY_CONTEXT_MENU = 0x1b6;/*
-														 * GenDesc - system
-														 * context menu
-														 */
-    public static final short KEY_MEDIA_REPEAT = 0x1b7;/*
-														 * Consumer - transport
-														 * control
-														 */
+    /** GenDesc - system context menu */
+    public static final short KEY_CONTEXT_MENU = 0x1b6;
+    /** Consumer - transport control */
+    public static final short KEY_MEDIA_REPEAT = 0x1b7;
 
     public static final short KEY_DEL_EOL = 0x1c0;
     public static final short KEY_DEL_EOS = 0x1c1;
@@ -567,11 +579,9 @@ public class InputEvent {
     public static final short KEY_BRL_DOT9 = 0x1f9;
     public static final short KEY_BRL_DOT10 = 0x1fa;
 
-    public static final short KEY_NUMERIC_0 = 0x200;/*
-													 * used by phones, remote
-													 * controls,
-													 */
-    public static final short KEY_NUMERIC_1 = 0x201;/* and other keypads */
+    /* used by phones, remote controls */
+    public static final short KEY_NUMERIC_0 = 0x200;
+    public static final short KEY_NUMERIC_1 = 0x201;
     public static final short KEY_NUMERIC_2 = 0x202;
     public static final short KEY_NUMERIC_3 = 0x203;
     public static final short KEY_NUMERIC_4 = 0x204;
@@ -588,9 +598,7 @@ public class InputEvent {
     public static final short KEY_MAX = 0x2ff;
     public static final short KEY_CNT = (KEY_MAX + 1);
 
-	/*
-	 * Relative axes
-	 */
+	/* Relative axes */
 
     public static final short REL_X = 0x00;
     public static final short REL_Y = 0x01;
@@ -605,9 +613,7 @@ public class InputEvent {
     public static final short REL_MAX = 0x0f;
     public static final short REL_CNT = (REL_MAX + 1);
 
-	/*
-	 * Absolute axes
-	 */
+	/* Absolute axes */
 
     public static final short ABS_X = 0x00;
     public static final short ABS_Y = 0x01;
@@ -636,71 +642,55 @@ public class InputEvent {
     public static final short ABS_VOLUME = 0x20;
     public static final short ABS_MISC = 0x28;
 
-    public static final short ABS_MT_TOUCH_MAJOR = 0x30;/*
-														 * Major axis of
-														 * touching ellipse
-														 */
-    public static final short ABS_MT_TOUCH_MINOR = 0x31;/*
-														 * Minor axis (omit if
-														 * circular)
-														 */
-    public static final short ABS_MT_WIDTH_MAJOR = 0x32;/*
-														 * Major axis of
-														 * approaching ellipse
-														 */
-    public static final short ABS_MT_WIDTH_MINOR = 0x33;/*
-														 * Minor axis (omit if
-														 * circular)
-														 */
-    public static final short ABS_MT_ORIENTATION = 0x34;/* Ellipse orientation */
-    public static final short ABS_MT_POSITION_X = 0x35;/*
-														 * Center X ellipse
-														 * position
-														 */
-    public static final short ABS_MT_POSITION_Y = 0x36;/*
-														 * Center Y ellipse
-														 * position
-														 */
-    public static final short ABS_MT_TOOL_TYPE = 0x37;/* Type of touching device */
-    public static final short ABS_MT_BLOB_ID = 0x38;/*
-													 * Group a set of packets as
-													 * a blob
-													 */
-    public static final short ABS_MT_TRACKING_ID = 0x39;/*
-														 * Unique ID of
-														 * initiated contact
-														 */
+    /** Major axis of touching ellipse */
+    public static final short ABS_MT_TOUCH_MAJOR = 0x30;
+    /** Minor axis (omit if circular) */
+    public static final short ABS_MT_TOUCH_MINOR = 0x31;
+    /** Major axis of approaching ellipse */
+    public static final short ABS_MT_WIDTH_MAJOR = 0x32;
+    /** Minor axis (omit if circular) */
+    public static final short ABS_MT_WIDTH_MINOR = 0x33;
+    /** Ellipse orientation */
+    public static final short ABS_MT_ORIENTATION = 0x34;
+    /** Center X ellipse position */
+    public static final short ABS_MT_POSITION_X = 0x35;
+    /** Center Y ellipse position */
+    public static final short ABS_MT_POSITION_Y = 0x36;
+    /** Type of touching device */
+    public static final short ABS_MT_TOOL_TYPE = 0x37;
+    /** Group a set of packets as a blob */
+    public static final short ABS_MT_BLOB_ID = 0x38;
+    /** Unique ID of initiated contact */
+    public static final short ABS_MT_TRACKING_ID = 0x39;
 
     public static final short ABS_MAX = 0x3f;
     public static final short ABS_CNT = (ABS_MAX + 1);
 
-	/*
-	 * Switch events
-	 */
-
-    public static final short SW_LID = 0x00;/* set = lid shut */
-    public static final short SW_TABLET_MODE = 0x01;/* set = tablet mode */
-    public static final short SW_HEADPHONE_INSERT = 0x02;/* set = inserted */
-    public static final short SW_RFKILL_ALL = 0x03;/*
-													 * rfkill master switch,
-													 * type "any" set = radio
-													 * enabled
-													 */
-    public static final short SW_RADIO = SW_RFKILL_ALL;/* deprecated */
-    public static final short SW_MICROPHONE_INSERT = 0x04;/* set = inserted */
-    public static final short SW_DOCK = 0x05;/* set = plugged into dock */
-    public static final short SW_LINEOUT_INSERT = 0x06;/* set = inserted */
-    public static final short SW_JACK_PHYSICAL_INSERT = 0x07;/*
-															 * set = mechanical
-															 * switch set
-															 */
-    public static final short SW_VIDEOOUT_INSERT = 0x08;/* set = inserted */
+	/* Switch events */
+    /** set = lid shut */
+    public static final short SW_LID = 0x00;
+    /** set = tablet mode */
+    public static final short SW_TABLET_MODE = 0x01;
+    /** set = inserted */
+    public static final short SW_HEADPHONE_INSERT = 0x02;
+    /** rfkill master switch, type "any" set = radio enabled */
+    public static final short SW_RFKILL_ALL = 0x03;
+    /** @deprecated */
+    public static final short SW_RADIO = SW_RFKILL_ALL;
+    /** set = inserted */
+    public static final short SW_MICROPHONE_INSERT = 0x04;
+    /** set = plugged into dock */
+    public static final short SW_DOCK = 0x05;
+    /** set = inserted */
+    public static final short SW_LINEOUT_INSERT = 0x06;
+    /** set = mechanical switch set */
+    public static final short SW_JACK_PHYSICAL_INSERT = 0x07;
+    /** set = inserted */
+    public static final short SW_VIDEOOUT_INSERT = 0x08;
     public static final short SW_MAX = 0x0f;
     public static final short SW_CNT = (SW_MAX + 1);
 
-	/*
-	 * Misc events
-	 */
+	/* Misc events */
 
     public static final short MSC_SERIAL = 0x00;
     public static final short MSC_PULSELED = 0x01;
@@ -710,9 +700,7 @@ public class InputEvent {
     public static final short MSC_MAX = 0x07;
     public static final short MSC_CNT = (MSC_MAX + 1);
 
-	/*
-	 * LEDs
-	 */
+	/* LEDs */
 
     public static final short LED_NUML = 0x00;
     public static final short LED_CAPSL = 0x01;
@@ -728,17 +716,13 @@ public class InputEvent {
     public static final short LED_MAX = 0x0f;
     public static final short LED_CNT = (LED_MAX + 1);
 
-	/*
-	 * Autorepeat values
-	 */
+	/* Autorepeat values */
 
     public static final short REP_DELAY = 0x00;
     public static final short REP_PERIOD = 0x01;
     public static final short REP_MAX = 0x01;
 
-	/*
-	 * Sounds
-	 */
+	/* Sounds */
 
     public static final short SND_CLICK = 0x00;
     public static final short SND_BELL = 0x01;
@@ -746,9 +730,7 @@ public class InputEvent {
     public static final short SND_MAX = 0x07;
     public static final short SND_CNT = (SND_MAX + 1);
 
-	/*
-	 * IDs.
-	 */
+	/* IDs. */
 
     public static final short ID_BUS = 0;
     public static final short ID_VENDOR = 1;
@@ -775,15 +757,11 @@ public class InputEvent {
     public static final short BUS_GSC = 0x1A;
     public static final short BUS_ATARI = 0x1B;
 
-    /*
-     * MT_TOOL types
-     */
+    /* MT_TOOL types */
     public static final short MT_TOOL_FINGER = 0;
     public static final short MT_TOOL_PEN = 1;
 
-    /*
-     * Values describing the status of a force-feedback effect
-     */
+    /* Values describing the status of a force-feedback effect */
     public static final short FF_STATUS_STOPPED = 0x00;
     public static final short FF_STATUS_PLAYING = 0x01;
     public static final short FF_STATUS_MAX = 0x01;

@@ -10,6 +10,10 @@
     <artifactId>evdev</artifactId>
     <name>evdev-java - Java implementation</name>
 
+    <properties>
+        <verify.checkstyle.max.violations>148</verify.checkstyle.max.violations>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>ch.ledcom.evdev</groupId>
