@@ -51,19 +51,19 @@ public class InputEvent {
     public static final short EV_MAX = 0x1f;
     public static final short EV_CNT = (EV_MAX + 1);
 
-	/* Synchronization events. */
+    /* Synchronization events. */
 
     public static final short SYN_REPORT = 0;
     public static final short SYN_CONFIG = 1;
     public static final short SYN_MT_REPORT = 2;
 
-	/*
-	 * Keys and buttons
-	 * 
-	 * Most of the keys/buttons are modeled after USB HUT 1.12 (see
-	 * http://www.usb.org/developers/hidpage). Abbreviations in the comments: AC
-	 * - Application Control AL - Application Launch Button SC - System Control
-	 */
+    /*
+     * Keys and buttons
+     *
+     * Most of the keys/buttons are modeled after USB HUT 1.12 (see
+     * http://www.usb.org/developers/hidpage). Abbreviations in the comments: AC
+     * - Application Control AL - Application Launch Button SC - System Control
+     */
 
     public static final short KEY_RESERVED = 0;
     public static final short KEY_ESC = 1;
@@ -181,11 +181,13 @@ public class InputEvent {
     public static final short KEY_MUTE = 113;
     public static final short KEY_VOLUMEDOWN = 114;
     public static final short KEY_VOLUMEUP = 115;
-    public static final short KEY_POWER = 116; /* SC System Power Down */
+    /** SC System Power Down */
+    public static final short KEY_POWER = 116;
     public static final short KEY_KPEQUAL = 117;
     public static final short KEY_KPPLUSMINUS = 118;
     public static final short KEY_PAUSE = 119;
-    public static final short KEY_SCALE = 120; /* AL Compiz Scale (Expose) */
+    /** AL Compiz Scale (Expose) */
+    public static final short KEY_SCALE = 120;
 
     public static final short KEY_KPCOMMA = 121;
     public static final short KEY_HANGEUL = 122;
@@ -196,39 +198,58 @@ public class InputEvent {
     public static final short KEY_RIGHTMETA = 126;
     public static final short KEY_COMPOSE = 127;
 
-    public static final short KEY_STOP = 128;/* AC Stop */
+    /** AC Stop */
+    public static final short KEY_STOP = 128;
     public static final short KEY_AGAIN = 129;
-    public static final short KEY_PROPS = 130;/* AC Properties */
-    public static final short KEY_UNDO = 131;/* AC Undo */
+    /** AC Properties */
+    public static final short KEY_PROPS = 130;
+    /** AC Undo */
+    public static final short KEY_UNDO = 131;
     public static final short KEY_FRONT = 132;
-    public static final short KEY_COPY = 133;/* AC Copy */
-    public static final short KEY_OPEN = 134;/* AC Open */
-    public static final short KEY_PASTE = 135;/* AC Paste */
-    public static final short KEY_FIND = 136;/* AC Search */
-    public static final short KEY_CUT = 137;/* AC Cut */
-    public static final short KEY_HELP = 138;/* AL Integrated Help Center */
-    public static final short KEY_MENU = 139;/* Menu (show menu) */
-    public static final short KEY_CALC = 140;/* AL Calculator */
+    /** AC Copy */
+    public static final short KEY_COPY = 133;
+    /** AC Open */
+    public static final short KEY_OPEN = 134;
+    /** AC Paste */
+    public static final short KEY_PASTE = 135;
+    /** AC Search */
+    public static final short KEY_FIND = 136;
+    /** AC Cut */
+    public static final short KEY_CUT = 137;
+    /** AL Integrated Help Center */
+    public static final short KEY_HELP = 138;
+    /** Menu (show menu) */
+    public static final short KEY_MENU = 139;
+    /** AL Calculator */
+    public static final short KEY_CALC = 140;
     public static final short KEY_SETUP = 141;
-    public static final short KEY_SLEEP = 142;/* SC System Sleep */
-    public static final short KEY_WAKEUP = 143;/* System Wake Up */
-    public static final short KEY_FILE = 144;/* AL Local Machine Browser */
+    /** SC System Sleep */
+    public static final short KEY_SLEEP = 142;
+    /** System Wake Up */
+    public static final short KEY_WAKEUP = 143;
+    /** AL Local Machine Browser */
+    public static final short KEY_FILE = 144;
     public static final short KEY_SENDFILE = 145;
     public static final short KEY_DELETEFILE = 146;
     public static final short KEY_XFER = 147;
     public static final short KEY_PROG1 = 148;
     public static final short KEY_PROG2 = 149;
-    public static final short KEY_WWW = 150;/* AL Internet Browser */
+    /** AL Internet Browser */
+    public static final short KEY_WWW = 150;
     public static final short KEY_MSDOS = 151;
-    public static final short KEY_COFFEE = 152;/* AL Terminal Lock/Screensaver */
+    /** AL Terminal Lock/Screensaver */
+    public static final short KEY_COFFEE = 152;
     public static final short KEY_SCREENLOCK = KEY_COFFEE;
     public static final short KEY_DIRECTION = 153;
     public static final short KEY_CYCLEWINDOWS = 154;
     public static final short KEY_MAIL = 155;
-    public static final short KEY_BOOKMARKS = 156;/* AC Bookmarks */
+    /** AC Bookmarks */
+    public static final short KEY_BOOKMARKS = 156;
     public static final short KEY_COMPUTER = 157;
-    public static final short KEY_BACK = 158;/* AC Back */
-    public static final short KEY_FORWARD = 159;/* AC Forward */
+    /** AC Back */
+    public static final short KEY_BACK = 158;
+    /** AC Forward */
+    public static final short KEY_FORWARD = 159;
     public static final short KEY_CLOSECD = 160;
     public static final short KEY_EJECTCD = 161;
     public static final short KEY_EJECTCLOSECD = 162;
@@ -238,23 +259,27 @@ public class InputEvent {
     public static final short KEY_STOPCD = 166;
     public static final short KEY_RECORD = 167;
     public static final short KEY_REWIND = 168;
-    public static final short KEY_PHONE = 169;/* Media Select Telephone */
+    /** Media Select Telephone */
+    public static final short KEY_PHONE = 169;
     public static final short KEY_ISO = 170;
-    public static final short KEY_CONFIG = 171;/*
-												 * AL Consumer Control
-												 * Configuration
-												 */
-    public static final short KEY_HOMEPAGE = 172;/* AC Home */
-    public static final short KEY_REFRESH = 173;/* AC Refresh */
-    public static final short KEY_EXIT = 174;/* AC Exit */
+    /** AL Consumer Control Configuration */
+    public static final short KEY_CONFIG = 171;
+    /** AC Home */
+    public static final short KEY_HOMEPAGE = 172;
+    /** AC Refresh */
+    public static final short KEY_REFRESH = 173;
+    /** AC Exit */
+    public static final short KEY_EXIT = 174;
     public static final short KEY_MOVE = 175;
     public static final short KEY_EDIT = 176;
     public static final short KEY_SCROLLUP = 177;
     public static final short KEY_SCROLLDOWN = 178;
     public static final short KEY_KPLEFTPAREN = 179;
     public static final short KEY_KPRIGHTPAREN = 180;
-    public static final short KEY_NEW = 181;/* AC New */
-    public static final short KEY_REDO = 182;/* AC Redo/Repeat */
+    /** AC New */
+    public static final short KEY_NEW = 181;
+    /** AC Redo/Repeat */
+    public static final short KEY_REDO = 182;
 
     public static final short KEY_F13 = 183;
     public static final short KEY_F14 = 184;
@@ -273,13 +298,16 @@ public class InputEvent {
     public static final short KEY_PAUSECD = 201;
     public static final short KEY_PROG3 = 202;
     public static final short KEY_PROG4 = 203;
-    public static final short KEY_DASHBOARD = 204;/* AL Dashboard */
+    /** AL Dashboard */
+    public static final short KEY_DASHBOARD = 204;
     public static final short KEY_SUSPEND = 205;
-    public static final short KEY_CLOSE = 206;/* AC Close */
+    /** AC Close */
+    public static final short KEY_CLOSE = 206;
     public static final short KEY_PLAY = 207;
     public static final short KEY_FASTFORWARD = 208;
     public static final short KEY_BASSBOOST = 209;
-    public static final short KEY_PRINT = 210;/* AC Print */
+    /** AC Print */
+    public static final short KEY_PRINT = 210;
     public static final short KEY_HP = 211;
     public static final short KEY_CAMERA = 212;
     public static final short KEY_SOUND = 213;
@@ -288,11 +316,13 @@ public class InputEvent {
     public static final short KEY_CHAT = 216;
     public static final short KEY_SEARCH = 217;
     public static final short KEY_CONNECT = 218;
-    public static final short KEY_FINANCE = 219;/* AL Checkbook/Finance */
+    /** AL Checkbook/Finance */
+    public static final short KEY_FINANCE = 219;
     public static final short KEY_SPORT = 220;
     public static final short KEY_SHOP = 221;
     public static final short KEY_ALTERASE = 222;
-    public static final short KEY_CANCEL = 223;/* AC Cancel */
+    /** AC Cancel */
+    public static final short KEY_CANCEL = 223;
     public static final short KEY_BRIGHTNESSDOWN = 224;
     public static final short KEY_BRIGHTNESSUP = 225;
     public static final short KEY_MEDIA = 226;
@@ -674,7 +704,7 @@ public class InputEvent {
     public static final short SW_HEADPHONE_INSERT = 0x02;
     /** rfkill master switch, type "any" set = radio enabled */
     public static final short SW_RFKILL_ALL = 0x03;
-    /** @deprecated */
+    /** @deprecated  */
     public static final short SW_RADIO = SW_RFKILL_ALL;
     /** set = inserted */
     public static final short SW_MICROPHONE_INSERT = 0x04;
