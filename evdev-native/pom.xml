@@ -8,6 +8,7 @@
     </parent>
 
     <artifactId>evdev-native</artifactId>
+    <name>evdev-java - Native implementation</name>
 
     <packaging>so</packaging>
 
@@ -20,6 +21,14 @@
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <configuration>
+                    <merge>true</merge>
+                    <path>${project.artifactId}</path>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>native-maven-plugin</artifactId>

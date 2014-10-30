@@ -8,6 +8,7 @@
     </parent>
 
     <artifactId>evdev</artifactId>
+    <name>evdev-java - Java implementation</name>
 
     <dependencies>
         <dependency>
@@ -25,6 +26,14 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <configuration>
+                    <merge>true</merge>
+                    <path>${project.artifactId}</path>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>

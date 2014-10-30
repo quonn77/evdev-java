@@ -8,5 +8,20 @@
     </parent>
 
     <artifactId>evdev-native-interface</artifactId>
+    <name>evdev-java - Java interface to native code</name>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.github.github</groupId>
+                    <artifactId>site-maven-plugin</artifactId>
+                    <configuration>
+                        <merge>true</merge>
+                        <path>${project.artifactId}</path>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
