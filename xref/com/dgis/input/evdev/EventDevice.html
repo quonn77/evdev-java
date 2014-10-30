@@ -53,7 +53,7 @@
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../com/dgis/input/evdev/EventDevice.html">EventDevice</a> {
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> NativeEventDevice nativeEventDevice;
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../com/dgis/input/evdev/NativeEventDevice.html">NativeEventDevice</a> nativeEventDevice;
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>      <em class="jxr_javadoccomment">/** system architecture, for arch-specific struct handling */</em>
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">private</strong> String arch = <span class="jxr_string">"amd64"</span>;
@@ -143,7 +143,7 @@
 <a class="jxr_linenumber" name="L135" href="#L135">135</a>             System.loadLibrary(<span class="jxr_string">"evdev-java"</span>);
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>         }
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>         <strong class="jxr_keyword">this</strong>.device = device;
-<a class="jxr_linenumber" name="L138" href="#L138">138</a>         <strong class="jxr_keyword">this</strong>.nativeEventDevice = <strong class="jxr_keyword">new</strong> NativeEventDevice();
+<a class="jxr_linenumber" name="L138" href="#L138">138</a>         <strong class="jxr_keyword">this</strong>.nativeEventDevice = <strong class="jxr_keyword">new</strong> <a href="../../../../com/dgis/input/evdev/NativeEventDevice.html">NativeEventDevice</a>();
 <a class="jxr_linenumber" name="L139" href="#L139">139</a>         inputBuffer.order(ByteOrder.LITTLE_ENDIAN);
 <a class="jxr_linenumber" name="L140" href="#L140">140</a>         initDevice();
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>     }
