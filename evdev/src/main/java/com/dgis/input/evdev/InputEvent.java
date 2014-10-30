@@ -364,7 +364,7 @@ public class InputEvent {
 
     public static final short KEY_WIMAX = 246;
 
-	/* Range 248 - 255 is reserved for special needs of AT keyboard driver */
+    /* Range 248 - 255 is reserved for special needs of AT keyboard driver */
 
     public static final short BTN_MISC = 0x100;
     public static final short BTN_0 = 0x100;
@@ -627,7 +627,7 @@ public class InputEvent {
     public static final short KEY_MAX = 0x2ff;
     public static final short KEY_CNT = (KEY_MAX + 1);
 
-	/* Relative axes */
+    /* Relative axes */
 
     public static final short REL_X = 0x00;
     public static final short REL_Y = 0x01;
@@ -642,7 +642,7 @@ public class InputEvent {
     public static final short REL_MAX = 0x0f;
     public static final short REL_CNT = (REL_MAX + 1);
 
-	/* Absolute axes */
+    /* Absolute axes */
 
     public static final short ABS_X = 0x00;
     public static final short ABS_Y = 0x01;
@@ -695,7 +695,7 @@ public class InputEvent {
     public static final short ABS_MAX = 0x3f;
     public static final short ABS_CNT = (ABS_MAX + 1);
 
-	/* Switch events */
+    /* Switch events */
     /** set = lid shut */
     public static final short SW_LID = 0x00;
     /** set = tablet mode */
@@ -719,7 +719,7 @@ public class InputEvent {
     public static final short SW_MAX = 0x0f;
     public static final short SW_CNT = (SW_MAX + 1);
 
-	/* Misc events */
+    /* Misc events */
 
     public static final short MSC_SERIAL = 0x00;
     public static final short MSC_PULSELED = 0x01;
@@ -729,7 +729,7 @@ public class InputEvent {
     public static final short MSC_MAX = 0x07;
     public static final short MSC_CNT = (MSC_MAX + 1);
 
-	/* LEDs */
+    /* LEDs */
 
     public static final short LED_NUML = 0x00;
     public static final short LED_CAPSL = 0x01;
@@ -745,13 +745,13 @@ public class InputEvent {
     public static final short LED_MAX = 0x0f;
     public static final short LED_CNT = (LED_MAX + 1);
 
-	/* Autorepeat values */
+    /* Autorepeat values */
 
     public static final short REP_DELAY = 0x00;
     public static final short REP_PERIOD = 0x01;
     public static final short REP_MAX = 0x01;
 
-	/* Sounds */
+    /* Sounds */
 
     public static final short SND_CLICK = 0x00;
     public static final short SND_BELL = 0x01;
@@ -759,7 +759,7 @@ public class InputEvent {
     public static final short SND_MAX = 0x07;
     public static final short SND_CNT = (SND_MAX + 1);
 
-	/* IDs. */
+    /* IDs. */
 
     public static final short ID_BUS = 0;
     public static final short ID_VENDOR = 1;

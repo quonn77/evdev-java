@@ -34,7 +34,7 @@ import java.util.Map;
 
 /**
  * Represents a connection to a Linux Evdev device.
- *
+ * <p/>
  * For additional info, see input/input.txt and input/input-programming.txt in the Linux kernel Documentation.
  * IMPORTANT: If you want higher-level access for your joystick/pad/whatever, check @see com.dgis.input.evdev.devices
  * for useful drivers to make your life easier!
@@ -145,7 +145,7 @@ public class EventDevice {
      * @throws IOException
      */
     private void initDevice() throws IOException {
-      if (!nativeEventDevice.ioctlGetID(device, idResponse)) {
+        if (!nativeEventDevice.ioctlGetID(device, idResponse)) {
             System.err.println("WARN: couldn't get device ID: " + device);
             Arrays.fill(idResponse, (short) 0);
         }
@@ -192,7 +192,7 @@ public class EventDevice {
                 if (i == 0) continue;
                 ArrayList<Integer> supportedTypes = new ArrayList<Integer>();
                 nativeEventDevice.ioctlEVIOCGBIT(device, bit[i], i, InputEvent.KEY_MAX);
-				/* Loop over event codes for type */
+                /* Loop over event codes for type */
                 for (int j = 0; j < InputEvent.KEY_MAX; j++)
                     if (testBit(bit[i], j)) { /* Is this event code supported? */
                         //System.out.printf("    Event code %d\n", j);
@@ -239,14 +239,14 @@ public class EventDevice {
      */
     private InputEvent readEvent() {
         try {
-			/* Read exactly the amount of bytes specified by InputEvent.STRUCT_SIZE_BYTES (intrinsic size of inputBuffer)*/
+            /* Read exactly the amount of bytes specified by InputEvent.STRUCT_SIZE_BYTES (intrinsic size of inputBuffer)*/
             inputBuffer.clear();
             while (inputBuffer.hasRemaining()) deviceInput.read(inputBuffer);
 
-			/* We want to read now */
+            /* We want to read now */
             inputBuffer.flip();
-			
-			/* Delegate parsing to InputEvent.parse() */
+
+            /* Delegate parsing to InputEvent.parse() */
             return InputEvent.parse(inputBuffer.asShortBuffer(), device, arch);
         } catch (IOException e) {
             System.err.println("IOException: " + e);

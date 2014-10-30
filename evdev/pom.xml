@@ -29,7 +29,7 @@
     <name>evdev-java - Java implementation</name>
 
     <properties>
-        <verify.checkstyle.max.violations>87</verify.checkstyle.max.violations>
+        <verify.checkstyle.max.violations>72</verify.checkstyle.max.violations>
     </properties>
 
     <dependencies>
