@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2009 - 2014 LedCom</copyright>
     <item>
-      <title>File: 13,
-             Errors: 72,
+      <title>File: 12,
+             Errors: 59,
              Warnings: 0,
              Infos: 0
       </title>
@@ -69,21 +69,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  16
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/evdev-java//checkstyle.html#com.dgis.input.evdev.InputAxisParametersImpl.java">com/dgis/input/evdev/InputAxisParametersImpl.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  10
+                  14
                 </td>
               </tr>
                           <tr>
@@ -111,7 +97,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  9
+                  8
                 </td>
               </tr>
                           <tr>
@@ -125,7 +111,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  9
+                  7
                 </td>
               </tr>
                           <tr>
@@ -209,7 +195,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  0
+                  2
                 </td>
               </tr>
                           <tr>
