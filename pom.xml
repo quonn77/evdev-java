@@ -28,7 +28,7 @@
 
     <groupId>ch.ledcom.evdev</groupId>
     <artifactId>evdev-java</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <url>http://gehel.github.com/evdev-java/</url>
@@ -43,7 +43,7 @@
     <scm>
         <connection>scm:git:git://github.com/gehel/evdev-java.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/gehel/evdev-java.git</developerConnection>
-        <tag>evdev-java-1.0</tag>
+        <tag>HEAD</tag>
         <url>https://github.com/gehel/evdev-java</url>
     </scm>
 

@@ -22,7 +22,7 @@
     <parent>
         <groupId>ch.ledcom.evdev</groupId>
         <artifactId>evdev-java</artifactId>
-        <version>1.0</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>evdev-native</artifactId>
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>ch.ledcom.evdev</groupId>
             <artifactId>evdev-native-interface</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>
