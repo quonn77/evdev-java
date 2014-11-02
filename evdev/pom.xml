@@ -14,7 +14,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with evdev-java - Java implementation.  If not, see <http://www.gnu.org/licenses/>.
+    along with evdev-java - Java implementation.  If not, see <http://www.gnu.org/licenses />.
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -22,7 +22,7 @@
     <parent>
         <groupId>ch.ledcom.evdev</groupId>
         <artifactId>evdev-java</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
     <artifactId>evdev</artifactId>
@@ -38,13 +38,13 @@
         <dependency>
             <groupId>ch.ledcom.evdev</groupId>
             <artifactId>evdev-native</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
             <type>so</type>
         </dependency>
         <dependency>
             <groupId>ch.ledcom.evdev</groupId>
             <artifactId>evdev-native-interface</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
