@@ -16,8 +16,15 @@
  */
 package com.dgis.input.evdev;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
+import javax.annotation.concurrent.Immutable;
 import java.io.IOException;
 import java.nio.ShortBuffer;
+
+import static com.dgis.input.evdev.EventType.valueOf;
 
 /**
  * Analog to the input_event struct in linux/input.h.
@@ -26,7 +33,9 @@ import java.nio.ShortBuffer;
  *
  * @author Giacomo Ferrari
  */
-
+@ToString
+@EqualsAndHashCode
+@Immutable
 public class InputEvent {
     /**
      * size of the input_event struct in bytes.
@@ -796,14 +805,14 @@ public class InputEvent {
     public static final short FF_STATUS_MAX = 0x01;
 
 
-    public final long timeSec;
-    public final long timeMicroSec;
-    public final /*__u16*/ short type;
-    public final /*__u16*/ short code;
-    public final /*__s32*/ int value;
-    public final String source;
+    @Getter public final long timeSec;
+    @Getter public final long timeMicroSec;
+    @Getter public final EventType type;
+    @Getter public final /*__u16*/ short code;
+    @Getter public final /*__s32*/ int value;
+    @Getter public final String source;
 
-    public InputEvent(long timeSec, long timeMicroSec, short type, short code, int value, String source) {
+    private InputEvent(long timeSec, long timeMicroSec, EventType type, short code, int value, String source) {
         this.timeSec = timeSec;
         this.timeMicroSec = timeMicroSec;
         this.type = type;
@@ -833,7 +842,7 @@ public class InputEvent {
      * @return the parsed InputEvent
      * @throws IOException
      */
-    public static InputEvent parse(ShortBuffer shortBuffer, String source, String arch) throws IOException {
+    public static InputEvent parse(ShortBuffer shortBuffer, String source, String arch) {
         short a, b, c, d;
         a = shortBuffer.get();
         b = shortBuffer.get();
@@ -862,14 +871,7 @@ public class InputEvent {
         d = shortBuffer.get();
         int value = (d << 16) | c;
 
-        return new InputEvent(timeSec, timeMicroSec, type, code, value, source);
-    }
-
-    @Override
-    public String toString() {
-        //TODO Java sucks at printing unsigned longs. Dur...
-        return String.format("Event: time %d.%06d, type %d, code %d, value %02x",
-                timeSec, timeMicroSec, type, code, value);
+        return new InputEvent(timeSec, timeMicroSec, valueOf(type), code, value, source);
     }
 
 }

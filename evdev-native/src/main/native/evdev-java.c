@@ -169,3 +169,15 @@ JNIEXPORT jboolean JNICALL Java_com_dgis_input_evdev_NativeEventDevice_ioctlEVIO
 
 	return retval;
 }
+
+/*
+ * Class:     com_dgis_input_evdev_NativeEventDevice
+ * Method:    ioctlEVIOCGRAB
+ * Signature: (II)Z
+ */
+JNIEXPORT jint JNICALL Java_com_dgis_input_evdev_NativeEventDevice_ioctlEVIOCGRAB
+    (JNIEnv *env, jobject obj, jint fd, jint flags) {
+
+    return ioctl(fd, EVIOCGRAB, flags);
+
+}

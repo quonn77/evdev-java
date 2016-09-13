@@ -27,10 +27,10 @@ package com.dgis.input.evdev.devices;
 public class JoystickState {
     private final int numButtons;
     private final int numAxes;
-    private boolean buttonStates[];
-    private int axisStates[];
-    private int axisMinValue[];
-    private int axisMaxValue[];
+    private final boolean buttonStates[];
+    private final int axisStates[];
+    private final int axisMinValue[];
+    private final int axisMaxValue[];
 
     JoystickState(int numButtons, int numAxes) {
         this.numButtons = numButtons;
@@ -119,10 +119,10 @@ public class JoystickState {
 
     @Override
     public String toString() {
-        StringBuffer buf = new StringBuffer("Buttons: [ ");
-        for (boolean b : buttonStates) buf.append((b ? 1 : 0) + " ");
+        StringBuilder buf = new StringBuilder("Buttons: [ ");
+        for (boolean b : buttonStates) buf.append(b ? 1 : 0).append(" ");
         buf.append("] Axes: [ ");
-        for (int a : axisStates) buf.append(a + " ");
+        for (int a : axisStates) buf.append(a).append(" ");
         buf.append("]");
         return buf.toString();
     }

@@ -28,4 +28,6 @@ public class NativeEventDevice {
 
     native boolean ioctlEVIOCGABS(String device, int[] resp, int axis);
 
+    native int ioctlEVIOCGRAB(int fd, int flags);
+
 }

@@ -17,11 +17,9 @@
 package com.dgis.input.evdev;
 
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -65,15 +63,13 @@ public class InputAxisParametersTest {
 
     private EventDevice mockEventDevice(final int position, final int value) {
         EventDevice eventDevice = mock(EventDevice.class);
-        final ArgumentCaptor<int[]> response = ArgumentCaptor.forClass(int[].class);
-        when(eventDevice.ioctlEVIOCGABS(any(String.class), response.capture(), any(Integer.class)))
-                .then(new Answer<Object>() {
-                    @Override
-                    public Object answer(InvocationOnMock invocation) throws Throwable {
-                        response.getValue()[position] = value;
-                        return true;
-                    }
+        when(eventDevice.ioctlEVIOCGABS(any(), any(int[].class), anyInt()))
+                .thenAnswer(invocation -> {
+                    int[] response = invocation.getArgument(1);
+                    response[position] = value;
+                    return true;
                 });
+
         return eventDevice;
     }
 

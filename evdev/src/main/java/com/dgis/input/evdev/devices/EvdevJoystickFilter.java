@@ -22,6 +22,7 @@ import com.dgis.input.evdev.InputListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,22 +43,22 @@ public class EvdevJoystickFilter implements InputListener {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private EventDevice device;
+    private final EventDevice device;
     private JoystickState state;
 
-    private ArrayList<JoystickListener> listeners = new ArrayList<JoystickListener>();
+    private final ArrayList<JoystickListener> listeners = new ArrayList<>();
 
     /**
      * Holds the event codes for each joystick button, in order. That is, if
      * event code 288 is button one, it is the first entry here.
      */
-    private ArrayList<Integer> buttonEventCodes = new ArrayList<Integer>();
+    private final ArrayList<Integer> buttonEventCodes = new ArrayList<>();
 
     /**
      * Holds the event codes for each joystick axis, in order. That is, if
      * event code 0 is axis one, it is the first entry here.
      */
-    private ArrayList<Integer> axisEventCodes = new ArrayList<Integer>();
+    private final ArrayList<Integer> axisEventCodes = new ArrayList<>();
 
     private boolean[] buttonChanged, axisChanged;
 
@@ -72,7 +73,7 @@ public class EvdevJoystickFilter implements InputListener {
     /**
      * Constructs an EvdevJoystickFilter using the provided event device as input.
      */
-    public EvdevJoystickFilter(String device) throws IOException {
+    public EvdevJoystickFilter(File device) throws IOException {
         this(new EventDevice(device));
     }
 
@@ -99,13 +100,13 @@ public class EvdevJoystickFilter implements InputListener {
     @Override
     public void event(InputEvent e) {
         switch (e.type) {
-            case InputEvent.EV_KEY:
+            case EV_KEY:
                 handleButton(e.code, e.value > 0);
                 break;
-            case InputEvent.EV_ABS:
+            case EV_ABS:
                 handleAxis(e.code, e.value);
                 break;
-            case InputEvent.EV_SYN:
+            case EV_SYN:
                 dispatchEvents();
             default:
                 logger.warn("Unknown event {}", e);

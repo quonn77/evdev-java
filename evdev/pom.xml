@@ -29,9 +29,9 @@
     <name>evdev-java - Java implementation</name>
 
     <properties>
-        <verify.checkstyle.max.violations>59</verify.checkstyle.max.violations>
-        <verify.coverage.threshold>84</verify.coverage.threshold>
-        <verify.mutation.threshold>9</verify.mutation.threshold>
+        <verify.checkstyle.max.violations>62</verify.checkstyle.max.violations>
+        <verify.coverage.threshold>80</verify.coverage.threshold>
+        <verify.mutation.threshold>8</verify.mutation.threshold>
     </properties>
 
     <dependencies>
@@ -47,9 +47,20 @@
             <version>1.2-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.1.0-beta.120</version>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -124,7 +135,7 @@
                                 <artifactItem>
                                     <groupId>ch.ledcom.evdev</groupId>
                                     <artifactId>evdev-native</artifactId>
-                                    <version>1.0-SNAPSHOT</version>
+                                    <version>${project.version}</version>
                                     <type>so</type>
                                 </artifactItem>
                             </artifactItems>

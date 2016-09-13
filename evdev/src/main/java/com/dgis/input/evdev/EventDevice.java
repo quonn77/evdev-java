@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static sun.misc.SharedSecrets.getJavaIOFileDescriptorAccess;
+
 /**
  * Represents a connection to a Linux Evdev device.
  * <p/>
@@ -69,7 +71,8 @@ public class EventDevice {
      * Attached to device we're using.
      */
     private FileChannel deviceInput;
-    private ByteBuffer inputBuffer;
+    private final ByteBuffer inputBuffer;
+    private int fd;
 
 
     /**
@@ -82,7 +85,7 @@ public class EventDevice {
      */
     private Thread readerThread;
 
-    private short[] idResponse = new short[4];
+    private final short[] idResponse = new short[4];
 
     private int evdevVersionResponse;
 
@@ -91,13 +94,13 @@ public class EventDevice {
     /**
      * Maps supported event types (keys) to lists of supported event codes.
      */
-    private HashMap<Integer, List<Integer>> supportedEvents = new HashMap<Integer, List<Integer>>();
+    private final HashMap<Integer, List<Integer>> supportedEvents = new HashMap<>();
 
 
     /**
      * Ensures only one instance of InputAxisParameters is created for each axis (more would be wasteful).
      */
-    private HashMap<Integer, InputAxisParameters> axisParams = new HashMap<>();
+    private final HashMap<Integer, InputAxisParameters> axisParams = new HashMap<>();
 
     /**
      * Create an EventDevice by connecting to the provided device filename.
@@ -106,7 +109,7 @@ public class EventDevice {
      * @param device The path to the device file. Usually one of /dev/input/event*
      * @throws IOException If the device is not found, or is otherwise inaccessible.
      */
-    public EventDevice(String device) throws IOException {
+    public EventDevice(File device) throws IOException {
         // check for embedded library:
         arch = System.getProperty("os.arch");
         logger.info("EventDevice: System: {}", arch);
@@ -125,7 +128,7 @@ public class EventDevice {
 
             final OutputStream out = new BufferedOutputStream(new FileOutputStream(nativeLibFile));
 
-            int len = 0;
+            int len;
             byte[] buffer = new byte[8192];
             while ((len = in.read(buffer)) > -1) {
                 out.write(buffer, 0, len);
@@ -138,7 +141,7 @@ public class EventDevice {
             logger.warn("EventDevice: falling back to java.library.path.");
             System.loadLibrary("evdev-java");
         }
-        this.device = device;
+        this.device = device.getAbsolutePath();
         this.nativeEventDevice = new NativeEventDevice();
         inputBuffer.order(ByteOrder.LITTLE_ENDIAN);
         initDevice();
@@ -167,6 +170,7 @@ public class EventDevice {
 
         FileInputStream fis = new FileInputStream(device);
         deviceInput = fis.getChannel();
+        fd = getJavaIOFileDescriptorAccess().get(fis.getFD());
 
         readerThread = new Thread() {
             @Override
@@ -195,7 +199,7 @@ public class EventDevice {
             if (testBit(bit[0], i)) { /* Is this event supported? */
                 //System.out.printf("  Event type %d\n", i);
                 if (i == 0) continue;
-                ArrayList<Integer> supportedTypes = new ArrayList<Integer>();
+                ArrayList<Integer> supportedTypes = new ArrayList<>();
                 nativeEventDevice.ioctlEVIOCGBIT(device, bit[i], i, InputEvent.KEY_MAX);
                 /* Loop over event codes for type */
                 for (int j = 0; j < InputEvent.KEY_MAX; j++)
@@ -322,6 +326,16 @@ public class EventDevice {
 
     public boolean ioctlEVIOCGABS(String device, int[] resp, int axis) {
         return nativeEventDevice.ioctlEVIOCGABS(device, resp, axis);
+    }
+
+    public void grab() {
+        if (nativeEventDevice.ioctlEVIOCGRAB(fd, 1) == 0) return;
+        throw new RuntimeException("Could not grab device");
+    }
+
+    public void unGrab() {
+        if (nativeEventDevice.ioctlEVIOCGRAB(fd, 0) == 0) return;
+        throw new RuntimeException("Could not ungrab device");
     }
 
 }

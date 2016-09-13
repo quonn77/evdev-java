@@ -21,6 +21,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.nio.ShortBuffer;
 
+import static com.dgis.input.evdev.EventType.EV_KEY;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputEventTest {
@@ -33,7 +34,7 @@ public class InputEventTest {
         // time micro seconds
         write(buffer, 4, 5, 0, 0);
         // type
-        buffer.put((short) 8);
+        buffer.put(EV_KEY.getValue());
         // code
         buffer.put((short) 9);
         // value
@@ -45,7 +46,7 @@ public class InputEventTest {
         assertThat(event.source).isEqualTo("source");
         assertThat(event.timeSec).isEqualTo((2L << 16) + 1);
         assertThat(event.timeMicroSec).isEqualTo((5L << 16) + 4);
-        assertThat(event.type).isEqualTo((short)8);
+        assertThat(event.type).isEqualTo(EV_KEY);
         assertThat(event.code).isEqualTo((short)9);
         assertThat(event.value).isEqualTo(10 + (11 << 16));
     }

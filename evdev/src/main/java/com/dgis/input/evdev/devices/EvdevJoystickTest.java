@@ -17,6 +17,7 @@
 package com.dgis.input.evdev.devices;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -37,7 +38,7 @@ public class EvdevJoystickTest {
             System.exit(1);
         }
 
-        String fn = args[0];
+        File fn = new File(args[0]);
         EvdevJoystickFilter dev = new EvdevJoystickFilter(fn);
         System.out.println("Hit enter to quit.");
 

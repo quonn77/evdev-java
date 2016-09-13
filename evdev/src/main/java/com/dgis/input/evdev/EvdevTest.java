@@ -17,6 +17,7 @@
 package com.dgis.input.evdev;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -39,7 +40,7 @@ public class EvdevTest {
             System.exit(1);
         }
 
-        String fn = args[0];
+        File fn = new File(args[0]);
         EventDevice dev = new EventDevice(fn);
         int version = dev.getEvdevVersion();
         System.out.printf("Input driver version is %d.%d.%d\n",
@@ -62,16 +63,13 @@ public class EvdevTest {
 
         System.out.println("Hit enter to quit.");
 
-        dev.addListener(new InputListener() {
-            @Override
-            public void event(InputEvent e) {
-                System.out.println(e);
-            }
-        });
+        dev.addListener(System.out::println);
+        dev.grab();
 
         //Wait for newline.
         new BufferedReader(new InputStreamReader(System.in)).readLine();
 
+        dev.unGrab();
         dev.close();
     }
 
