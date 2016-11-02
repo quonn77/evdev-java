@@ -25,8 +25,8 @@
         <version>1.2-SNAPSHOT</version>
     </parent>
 
-    <artifactId>evdev</artifactId>
-    <name>evdev-java - Java implementation</name>
+    <artifactId>evdev-examples</artifactId>
+    <name>evdev-java - Java Examples</name>
 
     <properties>
         <verify.checkstyle.max.violations>150</verify.checkstyle.max.violations>
@@ -37,19 +37,9 @@
     <dependencies>
         <dependency>
             <groupId>ch.ledcom.evdev</groupId>
-            <artifactId>evdev-native</artifactId>
+            <artifactId>evdev</artifactId>
             <version>1.2-SNAPSHOT</version>
-            <type>so</type>
-        </dependency>
-        <dependency>
-            <groupId>ch.ledcom.evdev</groupId>
-            <artifactId>evdev-native-interface</artifactId>
-            <version>1.2-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>2.1.0-beta.120</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -67,14 +57,14 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
+                <!-- <plugin>
                     <groupId>com.github.github</groupId>
                     <artifactId>site-maven-plugin</artifactId>
                     <configuration>
                         <merge>true</merge>
                         <path>${project.artifactId}</path>
                     </configuration>
-                </plugin>
+                </plugin>-->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>cobertura-maven-plugin</artifactId>
@@ -106,8 +96,7 @@
                         </execution>
                     </executions>
                 </plugin>
-              
-            </plugins>
+		    </plugins>
         </pluginManagement>
         <plugins>
             <plugin>

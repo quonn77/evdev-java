@@ -53,16 +53,6 @@
                         </check>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.pitest</groupId>
-                    <artifactId>pitest-maven</artifactId>
-                    <executions>
-                        <execution>
-                            <id>pitest</id>
-                            <phase>none</phase>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>

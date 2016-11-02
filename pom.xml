@@ -1,103 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
+<!-- This file is part of evdev-java. evdev-java is free software: you can 
+	redistribute it and/or modify it under the terms of the GNU General Public 
+	License as published by the Free Software Foundation, either version 3 of 
+	the License, or (at your option) any later version. evdev-java is distributed 
+	in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even 
+	the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+	See the GNU General Public License for more details. You should have received 
+	a copy of the GNU General Public License along with evdev-java. If not, see 
+	<http://www.gnu.org/licenses />. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    This file is part of evdev-java.
+	<parent>
+		<groupId>ch.ledcom</groupId>
+		<artifactId>ledcom-parent-pom</artifactId>
+		<version>1.55</version>
+	</parent>
 
-    evdev-java is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+	<groupId>ch.ledcom.evdev</groupId>
+	<artifactId>evdev-java</artifactId>
+	<version>1.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
-    evdev-java is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	<url>http://gehel.github.com/evdev-java/</url>
+	<inceptionYear>2009</inceptionYear>
 
-    You should have received a copy of the GNU General Public License
-    along with evdev-java.  If not, see <http://www.gnu.org/licenses />.
+	<modules>
+		<module>evdev-native</module>
+		<module>evdev-native-interface</module>
+		<module>evdev</module>
+		<module>evdev-examples</module>
+	</modules>
 
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	<scm>
+		<connection>scm:git:git://github.com/gehel/evdev-java.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/gehel/evdev-java.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/gehel/evdev-java</url>
+	</scm>
 
-    <parent>
-        <groupId>ch.ledcom</groupId>
-        <artifactId>ledcom-parent-pom</artifactId>
-        <version>1.55</version>
-    </parent>
+	<!-- <issueManagement> <system>GitHub</system> <url>https://github.com/gehel/evdev-java/issues</url> 
+		</issueManagement> <ciManagement> <system>travis</system> <url>https://travis-ci.org/gehel/evdev-java</url> 
+		</ciManagement> -->
+	<properties>
+		<license.skip>true</license.skip>
+	</properties>
 
-    <groupId>ch.ledcom.evdev</groupId>
-    <artifactId>evdev-java</artifactId>
-    <version>1.2-SNAPSHOT</version>
-    <packaging>pom</packaging>
+	<repositories>
+		<repository>
+			<id>egit</id>
+			<name>Eclipse egit</name>
+			<url>https://repo.eclipse.org/content/repositories/egit-releases/</url>
+		</repository>
+	</repositories>
 
-    <url>http://gehel.github.com/evdev-java/</url>
-    <inceptionYear>2009</inceptionYear>
-
-    <modules>
-        <module>evdev-native</module>
-        <module>evdev-native-interface</module>
-        <module>evdev</module>
-    </modules>
-
-    <scm>
-        <connection>scm:git:git://github.com/gehel/evdev-java.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/gehel/evdev-java.git</developerConnection>
-        <tag>HEAD</tag>
-        <url>https://github.com/gehel/evdev-java</url>
-    </scm>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/gehel/evdev-java/issues</url>
-    </issueManagement>
-
-    <ciManagement>
-        <system>travis</system>
-        <url>https://travis-ci.org/gehel/evdev-java</url>
-    </ciManagement>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>com.mycila</groupId>
-                    <artifactId>license-maven-plugin</artifactId>
-                    <configuration>
-                        <header>com/mycila/maven/plugin/license/templates/GPL-3.txt</header>
-                        <properties>
-                            <year>${project.inceptionYear}</year>
-                            <owner>Giacomo Ferrari</owner>
-                            <email>http://giferrari.net/blog/</email>
-                        </properties>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>com.mycila</groupId>
-                    <artifactId>license-maven-plugin</artifactId>
-                    <configuration>
-                        <excludes>
-                            <exclude>**/pom.xml</exclude>
-                        </excludes>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <configuration>
-                        <suppressionsLocation>src/etc/checkstyle-suppressions.xml</suppressionsLocation>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.5.1</version>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<configuration>
+						<suppressionsLocation>src/etc/checkstyle-suppressions.xml</suppressionsLocation>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.6.0</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.pitest</groupId>
+					<artifactId>pitest-maven</artifactId>
+<!-- 					<version>LATEST</version> -->
+					<configuration>
+					    <skip>true</skip>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<profiles>
+		<profile>
+			<id>disable-java8-doclint</id>
+			<activation>
+				<jdk>[1.8,)</jdk>
+			</activation>
+			<properties>
+				<additionalparam>-Xdoclint:none</additionalparam>
+			</properties>
+		</profile>
+	</profiles>
 </project>

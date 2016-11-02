@@ -11,5 +11,9 @@ build
 out/
 classes/
 .DS_STORE
+**/*.project
+**/*.settings
+**/*.checkstyle
+**/*.classpath
 
 target
