@@ -44,6 +44,9 @@ public final class ComponentFinder {
                 c = ((Container)top).findComponentAt(p);
             }
         }
+        if(c==null){
+            c = SwingUtilities.getDeepestComponentAt(top, p.x, p.y);
+        }
         return c;
     }
 }

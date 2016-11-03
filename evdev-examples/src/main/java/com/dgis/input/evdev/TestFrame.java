@@ -45,6 +45,10 @@ import javax.swing.SwingUtilities;
 public class TestFrame extends JFrame {
     
 
+    private JButton okButton;
+    private ImageGlassPane bgp;
+
+
     /**
     * 
     */
@@ -96,7 +100,7 @@ public class TestFrame extends JFrame {
         jpnContainer.setName("Container");
         JLabel jlblContent = new JLabel();
         jlblContent.setName("Content");
-        JButton okButton =new JButton("OK");
+        okButton =new JButton("OK");
         okButton.setName("okButton");
         okButton.addActionListener((ae)->{
             jlblContent.setText("Clicked");
@@ -113,12 +117,27 @@ public class TestFrame extends JFrame {
         jpnContainer.add(jlblContent);
         getContentPane().add(jpnContainer);
         
-        ImageGlassPane bgp =new ImageGlassPane(this.getContentPane());
+        bgp =new ImageGlassPane(this.getContentPane());
         bgp.setBackground(Color.BLACK);
         bgp.setAlphaValue(0.1f);
         setGlassPane(bgp);
         bgp.setVisible(true);
         pack();
         
+    }
+    
+    
+    /**
+     * @return the bgp
+     */
+    public ImageGlassPane getBgp() {
+        return bgp;
+    }
+    
+    /**
+     * @return the okButton
+     */
+    public JButton getOkButton() {
+        return okButton;
     }
 }

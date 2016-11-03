@@ -21,6 +21,7 @@ import java.awt.AWTException;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.Robot;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -51,7 +52,7 @@ public class EvdevMouseTest {
         Robot robot=null;
         try {
             robot = new Robot();
-            robot.mouseMove(0, 0);
+//            robot.mouseMove(0, 0);
         } catch (AWTException e1) {
             e1.printStackTrace();
             
@@ -67,14 +68,16 @@ public class EvdevMouseTest {
                 e.printStackTrace();
             }
             final TestFrame tf = new TestFrame();
+            tf.setLocation(1921, 0);
             EvdevMouseFilter mouseHandler = new EvdevMouseFilter(fn);
-//            mouseHandler.getDevice().grab();
+            //mouseHandler.getDevice().grab();
+            mouseHandler.addMouseListener(tf.getBgp());
             mouseHandler.addMouseListener(new IMouseListener() {
 
                 @Override
                 public void mouseMoved(int x, int y) {
                     System.out.println("mouseMoved() x=" + x + " y=" + y);
-                    localRobot.mouseMove(x, y);
+//                    localRobot.mouseMove(x, y);
 
                 }
 
@@ -86,18 +89,31 @@ public class EvdevMouseTest {
 
                 @Override
                 public void mousePressed(MouseButton btn, int x, int y) {
-                    System.out.println("mousePressed() " + btn + " X:" + x + " Y:" + y);
-
+                    Point okLocation = new Point(tf.getOkButton().getLocation());
+                    SwingUtilities.convertPointToScreen(okLocation,tf);
+                    System.out.println("mousePressed() " + btn + " X:" + x + " Y:" + y+" Frame location:"+tf.getLocation()+" ButtonOk Location "+okLocation);
                     Point p = new Point(x, y);
-
-                    Component c = ComponentFinder.findComponentUnderGlassPane(p, tf);
-                    if (c instanceof JButton) {
+                    SwingUtilities.convertPointFromScreen(p, tf);
+                    System.out.println("mousePressed() " + btn + " X:" + p.x + " Y:" + p.y);
+                    
+                    Component comp = ComponentFinder.findComponentUnderGlassPane(p, tf);
+//                    comp.dispatchEvent(me);
+                    if (comp instanceof JButton) {
                         SwingUtilities.invokeLater(() -> {
-                            ((JButton) c).doClick();
+                            ((JButton) comp).doClick();
                             tf.repaint();
                         });
                     }
-                    System.out.println("Component is " + (c != null ? c.getName() : "Unknown"));
+                    System.out.println("Component is " + (comp != null ? comp.getName() : "Unknown"));
+                }
+
+                private int getMouseEvent(MouseButton btn) {
+                    switch(btn){
+                        case LEFT:return MouseEvent.BUTTON1_DOWN_MASK;
+                        case MIDDLE: return MouseEvent.BUTTON3_DOWN_MASK;
+                        case RIGHT: return MouseEvent.BUTTON2_DOWN_MASK;
+                    }
+                    return 0;
                 }
 
                 @Override

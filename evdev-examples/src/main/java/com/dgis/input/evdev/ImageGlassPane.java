@@ -18,11 +18,13 @@ package com.dgis.input.evdev;
 
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -30,13 +32,19 @@ import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import com.dgis.input.evdev.devices.IMouseListener;
 
 /**
  * 
@@ -55,7 +63,7 @@ import javax.swing.JOptionPane;
  * @version $Id: ImageGlassPane.java 13196 2015-09-07 10:59:13Z sccp_ian $
  *
  */
-public class ImageGlassPane extends BlockableGlassPane {
+public class ImageGlassPane extends BlockableGlassPane implements IMouseListener{
 
     private Icon icon;
     private BufferedImage bim;
@@ -103,6 +111,9 @@ public class ImageGlassPane extends BlockableGlassPane {
     private boolean heightSet = false;
     private boolean bgWidthSet = false;
     private boolean bgHeightSet = false;
+    private int xMouse;
+    private int yMouse;
+    private BufferedImage bimIcon;
 
     /**
      * Create an {@link ImageGlassPane} acting on the specified container
@@ -131,6 +142,15 @@ public class ImageGlassPane extends BlockableGlassPane {
             }
 
         });
+        
+        //load cursor images
+        
+        try {
+            bimIcon = ImageIO.read(ClassLoader.getSystemResourceAsStream("images/MousePointer.png"));
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
     }
 
     /**
@@ -436,6 +456,7 @@ public class ImageGlassPane extends BlockableGlassPane {
      */
     @Override
     protected void paintComponent(Graphics g) {
+        System.out.println("ImageGlassPane.paintComponent()");
         repaintContainer(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -459,11 +480,64 @@ public class ImageGlassPane extends BlockableGlassPane {
 
         }
         g2.setComposite(composite);
+        //g2.setColor(Color.BLACK);
+        g2.drawImage(bimIcon, xMouse, yMouse, this);
+        g2.setClip(originalClip);
+       
         if (customRender == null) {
             return;
         }
-        g.setClip(originalClip);
         customRender.render(g, getWidth(), getHeight());
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void mouseMoved(int x, int y) {
+        Point screen =new Point(x,y);
+        SwingUtilities.convertPointFromScreen(screen, this);
+        this.xMouse = screen.x;
+        this.yMouse = screen.y;
+        System.out.println("ImageGlassPane.mouseMoved() x="+x+" y="+y);
+        this.repaint();
+        
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void mouseDragged(int x, int y) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void mousePressed(MouseButton btn, int x, int y) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void mouseReleased(MouseButton btn, int x, int y) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void mouseWheel(WheelDirection dir, int velocity, int x, int y) {
+        // TODO Auto-generated method stub
+        
     }
 }
