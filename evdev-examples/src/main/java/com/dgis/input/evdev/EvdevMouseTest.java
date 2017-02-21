@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -32,14 +33,12 @@ import com.dgis.input.evdev.devices.EvdevMouseFilter;
 import com.dgis.input.evdev.devices.IMouseListener;
 import com.dgis.input.evdev.util.ComponentFinder;
 
-import javafx.scene.input.MouseButton;
 
 /**
- * //TODO First sentence till the "." is a brief description.
- * //The rest of the phrase is the detailed description.
+ * Work in progress. This is a test clss...
  *
  *
- * @author quonn - Rheinmetall Italia S.p.A.
+ * @author Alessio Iannone
  *
  */
 public class EvdevMouseTest {
@@ -103,6 +102,9 @@ public class EvdevMouseTest {
                             ((JButton) comp).doClick();
                             tf.repaint();
                         });
+                    }
+                    if(comp instanceof JComboBox){
+                        
                     }
                     System.out.println("Component is " + (comp != null ? comp.getName() : "Unknown"));
                 }

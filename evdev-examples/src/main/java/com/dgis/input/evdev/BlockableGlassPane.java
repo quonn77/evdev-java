@@ -55,7 +55,7 @@ import javax.swing.SwingUtilities;
  * 
  * 
  *
- * @author Alessio Iannone - Rheinmetall Italia S.p.A.
+ * @author Alessio Iannone
  * Created on 26/mar/2015
  * @version $Id: BlockableGlassPane.java 13196 2015-09-07 10:59:13Z sccp_ian $
  *

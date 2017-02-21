@@ -18,7 +18,6 @@ package com.dgis.input.evdev;
 
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Container;
 import java.awt.Dialog;
@@ -32,7 +31,6 @@ import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -58,7 +56,7 @@ import com.dgis.input.evdev.devices.IMouseListener;
  *        implementation
  *
  *
- * @author Alessio Iannone - Rheinmetall Italia S.p.A.
+ * @author Alessio Iannone
  * Created on 26/mar/2015
  * @version $Id: ImageGlassPane.java 13196 2015-09-07 10:59:13Z sccp_ian $
  *
