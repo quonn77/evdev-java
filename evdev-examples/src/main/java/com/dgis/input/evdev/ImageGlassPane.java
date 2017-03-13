@@ -42,7 +42,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import com.dgis.input.evdev.devices.IMouseListener;
+import com.dgis.input.evdev.devices.IMoveMouseListener;
 
 /**
  * 
@@ -61,7 +61,7 @@ import com.dgis.input.evdev.devices.IMouseListener;
  * @version $Id: ImageGlassPane.java 13196 2015-09-07 10:59:13Z sccp_ian $
  *
  */
-public class ImageGlassPane extends BlockableGlassPane implements IMouseListener{
+public class ImageGlassPane extends BlockableGlassPane implements IMoveMouseListener{
 
     private Icon icon;
     private BufferedImage bim;

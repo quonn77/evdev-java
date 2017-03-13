@@ -16,11 +16,6 @@
  * */
 package com.dgis.input.evdev.devices;
 
-import java.awt.GraphicsDevice;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Robot;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,42 +29,32 @@ import com.dgis.input.evdev.EventDevice;
 import com.dgis.input.evdev.InputEvent;
 import com.dgis.input.evdev.InputListener;
 import com.dgis.input.evdev.devices.IMouseListener.MouseButton;
-import com.dgis.input.evdev.devices.IMouseListener.WheelDirection;
 
 /**
- * Filter input event and handle them like mouse events
+ * Filter input event and handle them like mouse events.
  *
- * @author Alessio Iannone - Rheinmetall Italia S.p.A.
+ * @author Andrea Picchiani - Rheinmetall Italia S.p.A.
  *
  */
-public class EvdevMouseFilter implements InputListener {
-    private final static Logger logger = LoggerFactory.getLogger(EvdevMouseFilter.class);
+public class EvdevRelativeMouseFilter implements InputListener {
+    private final static Logger logger = LoggerFactory.getLogger(EvdevRelativeMouseFilter.class);
     private EventDevice device;
 
-    private ArrayList<IMoveMouseListener> listeners;
-
-    private Point actualMousePosition;
+    private ArrayList<IRelativeMouseListener> listeners;
 
     private boolean pressed;
-    private int maxWidth;
-    private int maxHeight;
-    private int minHeight;
-    private int minWidth;
-    private Robot robot;
-    private Rectangle screenBounds;
 
     /**
      * 
      */
-    public EvdevMouseFilter(EventDevice dev) {
+    public EvdevRelativeMouseFilter(EventDevice dev) {
         this.device = dev;
         this.pressed = false;
         this.listeners = new ArrayList<>();
-        this.actualMousePosition = new Point(0, 0);
         setupDevice();
     }
 
-    public EvdevMouseFilter(String device) throws IOException {
+    public EvdevRelativeMouseFilter(String device) throws IOException {
         this(new EventDevice(new File(device)));
     }
 
@@ -80,27 +65,7 @@ public class EvdevMouseFilter implements InputListener {
         Map<Integer, List<Integer>> supportedEvents = device.getSupportedEvents();
         List<Integer> supportedKeys = supportedEvents.get((int) InputEvent.EV_KEY);
         int numButtons = supportedKeys == null ? 0 : supportedKeys.size();
-
-        // Initialize actual mouse position
-        GraphicsDevice device = MouseInfo.getPointerInfo().getDevice();
-        screenBounds = device.getDefaultConfiguration().getBounds();
-        minWidth = screenBounds.x;
-        minHeight = screenBounds.y;
-        maxWidth = device.getDisplayMode().getWidth() + minWidth;
-        maxHeight = device.getDisplayMode().getHeight() + minHeight;
-        robot = null;
-//        try {
-//            robot = new Robot();
-//            robot.mouseMove(minWidth, minHeight);
-//        } catch (AWTException e) {
-//            e.printStackTrace();
-//        }
-        
-        
-        actualMousePosition = MouseInfo.getPointerInfo().getLocation();
-
-        System.out.println("Max Width:" + maxWidth + " Max Height:" + maxHeight + " Bounds:" + screenBounds
-                + " Actual Mouse Position:" + actualMousePosition);
+        System.out.println("Device " +device.getDeviceName());
         System.out.println("Detected " + numButtons + " buttons.");
         //this.device.grab();
         this.device.addListener(this);
@@ -120,7 +85,6 @@ public class EvdevMouseFilter implements InputListener {
      */
     @Override
     public void event(InputEvent e) {
-        boolean dispatchPosition = false;
         switch (e.type) {
             case EV_KEY:
                 if (e.value == 1) {
@@ -135,54 +99,43 @@ public class EvdevMouseFilter implements InputListener {
                 // System.out.println("Axis Parameter:"+device.getAxisParameters(e.code));
                 if (e.code == InputEvent.REL_X) {
                     // X AXIS
-                    actualMousePosition.x += e.value;
-                    if (actualMousePosition.x > maxWidth) {
-                        actualMousePosition.x = maxWidth;
-//                        robot.mouseMove(actualMousePosition.x, actualMousePosition.y);
-                    } else if (actualMousePosition.x < minWidth) {
-                        actualMousePosition.x = minWidth;
-//                        robot.mouseMove(actualMousePosition.x, actualMousePosition.y);
-                    }
-                    dispatchPosition = true;
+                    notifyMouseMoveX(e.value);
                 } else if (e.code == InputEvent.REL_Y) {
-                    actualMousePosition.y += e.value;
-                    if (actualMousePosition.y > maxHeight) {
-                        actualMousePosition.y = maxHeight;
-//                        robot.mouseMove(actualMousePosition.x, actualMousePosition.y);
-                    } else if (actualMousePosition.y < minHeight) {
-                        actualMousePosition.y = minHeight;
-//                        robot.mouseMove(actualMousePosition.x, actualMousePosition.y);
-                    }
-                    dispatchPosition = true;
-                } else if (e.code == InputEvent.REL_WHEEL) {
-                    notifyMouseWheel(getDirection(e), Math.abs(e.value));
-                }
+                    notifyMouseMoveY(e.value);
+                } 
+//                else if (e.code == InputEvent.REL_WHEEL) {
+//                    notifyMouseWheel(getDirection(e), Math.abs(e.value));
+//                }
                 break;
 
         }
-        if (dispatchPosition && !pressed) {
-            notifyMousePosition(actualMousePosition);
-        } else if (dispatchPosition && pressed) {
-            notifyMouseDragged(actualMousePosition);
-        }
+//        if (dispatchPosition && !pressed) {
+//            notifyMousePosition(relativePosition);
+//        } 
+//        else if (dispatchPosition && pressed) {
+//            notifyMouseDragged(relativePosition);
+//        }
 
     }
 
     /**
      * @param Position
      */
-    private synchronized void notifyMouseDragged(Point pos) {
+//    private synchronized void notifyMouseDragged(Point pos) {
+//        listeners.forEach((ml) -> {
+//            ml.mouseDragged(pos.x, pos.y);
+//        });
+//    }
+    
+    private synchronized void notifyMouseMoveX(int x) {
         listeners.forEach((ml) -> {
-            ml.mouseDragged(pos.x, pos.y);
+            ml.mouseMovedX(x);
         });
     }
-
-    /**
-     * @param actualMousePosition2
-     */
-    private synchronized void notifyMousePosition(Point pos) {
+    
+    private synchronized void notifyMouseMoveY(int y) {
         listeners.forEach((ml) -> {
-            ml.mouseMoved(pos.x, pos.y);
+            ml.mouseMovedY(y);
         });
     }
 
@@ -190,28 +143,28 @@ public class EvdevMouseFilter implements InputListener {
      * @param direction
      * @param abs
      */
-    private synchronized void notifyMouseWheel(WheelDirection direction, int abs) {
-        listeners.forEach((ml) -> {
-            ml.mouseWheel(direction, abs, actualMousePosition.x, actualMousePosition.y);
-        });
-    }
+//    private synchronized void notifyMouseWheel(WheelDirection direction, int abs) {
+//        listeners.forEach((ml) -> {
+//            ml.mouseWheel(direction, abs, relativePosition.x, relativePosition.y);
+//        });
+//    }
 
     /**
      * @param e
      * @return
      */
-    private WheelDirection getDirection(InputEvent e) {
-        if (e.value > 0)
-            return WheelDirection.UP;
-        return WheelDirection.DOWN;
-    }
+//    private WheelDirection getDirection(InputEvent e) {
+//        if (e.value > 0)
+//            return WheelDirection.UP;
+//        return WheelDirection.DOWN;
+//    }
 
     /**
      * @param mouseButton
      */
     private synchronized void notifyMouseReleased(MouseButton mouseButton) {
         listeners.forEach((ml) -> {
-            ml.mouseReleased(mouseButton, actualMousePosition.x, actualMousePosition.y);
+            ml.mouseReleased(mouseButton);
         });
     }
 
@@ -220,13 +173,8 @@ public class EvdevMouseFilter implements InputListener {
      */
     private synchronized void notifyMousePressed(MouseButton mouseButton) {
         listeners.forEach((ml) -> {
-            try {
-                ml.mousePressed(mouseButton, actualMousePosition.x, actualMousePosition.y);
-            } catch (Exception ex) {
-                ;
-            }
+                ml.mousePressed(mouseButton);
         });
-
     }
 
     /**
@@ -254,7 +202,7 @@ public class EvdevMouseFilter implements InputListener {
      * 
      * @param listener
      */
-    public synchronized void addMouseListener(IMoveMouseListener listener) {
+    public synchronized void addMouseListener(IRelativeMouseListener listener) {
         listeners.add(listener);
     }
 
@@ -263,7 +211,7 @@ public class EvdevMouseFilter implements InputListener {
      * 
      * @param listener
      */
-    public synchronized void removeMouseListener(IMoveMouseListener listener) {
+    public synchronized void removeMouseListener(IRelativeMouseListener listener) {
         listeners.remove(listener);
     }
 

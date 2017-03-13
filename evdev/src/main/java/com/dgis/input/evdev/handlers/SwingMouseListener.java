@@ -6,7 +6,7 @@
  */
 package com.dgis.input.evdev.handlers;
 
-import com.dgis.input.evdev.devices.IMouseListener;
+import com.dgis.input.evdev.devices.IMoveMouseListener;
 
 /**
  * //TODO First sentence till the "." is a brief description. 
@@ -16,7 +16,7 @@ import com.dgis.input.evdev.devices.IMouseListener;
  * @author  Alessio Iannone - Rheinmetall Italia S.p.A.
  *
  */
-public class SwingMouseListener implements IMouseListener {
+public class SwingMouseListener implements IMoveMouseListener {
 
     /**
      * {@inheritDoc}

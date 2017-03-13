@@ -163,6 +163,10 @@ public class BlockableGlassPane extends JPanel
             redispatchMouseEvent(e);
     }
 
+    /**
+     * 
+     */
+    @Override
     public void mouseMoved(MouseEvent e) {
         if (needToRedispatch)
             redispatchMouseEvent(e);
